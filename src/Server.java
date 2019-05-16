@@ -1,9 +1,14 @@
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.List;
+
 public class Server {
 	DatagramSocket recieveSocket, sendSocket;
 	DatagramPacket recievePacket, sendPacket;
 	ComFunctions com;
+	List<Thread> threadList;
+	
+	
 	/**
 	 * Checks to see if a byte array is on the required format read/write,text,0,text,0...0
 	 * @param msg message that is to be checked
@@ -72,6 +77,7 @@ public class Server {
 		
 		recieveSocket = com.startSocket(69);
 		sendSocket = com.startSocket();
+		threadList = new List<Thread>();
 		
 		
 	}
