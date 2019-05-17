@@ -1,15 +1,16 @@
-import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import javax.swing.*;
+import java.io.*;
 
 public class ComFunctions {
 	
 	public final int KNOWNLEN = 4;
 	public final int UNKNOWNLEN = 100;
 	private final static char[] hexArr = "0123456789ABCDEF".toCharArray();
+	public int fileLength;
 	
 	/**
 	 * Recieves a packet on the specified socket 
@@ -123,14 +124,15 @@ public class ComFunctions {
 	 * @param format format of the file
 	 * @return byte array of specified message format
 	 */
-	public byte[] generateMessage(byte[] type, String file, String format) {
-		byte[] msg = new byte[file.length() + format.length() + 4];
+	public byte[] generateMessage(byte[] type, byte[] file, String format) {
+		byte[] msg = new byte[file.length + format.length() + 4];
 		msg[0] = type[0];
 		msg[1] = type[1];
 		int track = 2; 
 		
-		for(byte c : file.getBytes() ) {
+		for(byte c : file) {
 			msg[track] = c; 
+			fileLength++;
 			track ++;
 		}
 		
@@ -173,10 +175,11 @@ public class ComFunctions {
 	    return new String(hexChars);
 	}
 	
-	public void guiPrint(String init, byte[] msg, JTextArea a) {
+	public void guiPrintArr(String init, byte[] msg, JTextArea a) {
 		String msgAsString = init + " " + new String(msg) + bytesToHex(msg) + "\n";
 		a.append(msgAsString);
+	}	
+	public void guiPrint(String msg, JTextArea a) {
+		a.append(msg);
 	}
-	
-	
 }
