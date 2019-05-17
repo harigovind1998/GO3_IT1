@@ -6,7 +6,6 @@ public class Server {
 	DatagramSocket recieveSocket, sendSocket;
 	DatagramPacket recievePacket, sendPacket;
 	ComFunctions com;
-	List<Thread> threadList;
 	
 	
 	/**
@@ -76,10 +75,9 @@ public class Server {
 		com = new ComFunctions();
 		
 		recieveSocket = com.startSocket(69);
-		sendSocket = com.startSocket();
-		threadList = new List<Thread>();
-		
-		
+		sendSocket = com.startSocket();		
+		ServerExitListener exit = new ServerExitListener("Exit listener");
+		exit.run();
 	}
 
 	
