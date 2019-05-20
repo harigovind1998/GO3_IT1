@@ -1,5 +1,6 @@
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.Arrays;
 public class ServerWorker extends Thread {
 	private final int BLOCK_SIZE = 512;
 	private DatagramPacket initialPacket, RecievedResponse, SendingResponse;
@@ -14,7 +15,21 @@ public class ServerWorker extends Thread {
 	private void getFileName() {
 		byte[] data = initialPacket.getData();
 		fileName = "";
+		int[] secondZero = {3,0,0};
+		int track = 1;
+		for(int i = 3; i<data.length ; i ++) {
+			if(data[i] == 0) {
+				secondZero[track] = i;
+				track++;
+				if (track == 3) {
+					break;
+				}
+			}
+		}
 		
+		byte[] file = Arrays.copyOfRange(data, 4 , secondZero[1]-1);
+		byte[] mode = Arrays.copyOfRange(data, secondZero[1]+1, secondZero[2]-1);
+		System.out.println(new String(file));
 	}
 	
 	
