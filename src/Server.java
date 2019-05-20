@@ -77,7 +77,7 @@ public class Server {
 		recieveSocket = com.startSocket(69);
 		sendSocket = com.startSocket();		
 		ServerExitListener exit = new ServerExitListener("Exit listener");
-		exit.run();
+		exit.start();
 	}
 
 	
