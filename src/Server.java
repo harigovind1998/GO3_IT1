@@ -22,10 +22,7 @@ public class Server {
 				errorSocket = com.startSocket();
 				com.sendPacket(errorPacket, errorSocket);
 				errorSocket.close();
-			}
-			
-			
-			
+			}			
 		}
 	}
 	
