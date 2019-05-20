@@ -1,6 +1,6 @@
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.util.List;
+
 
 public class Server {
 	DatagramSocket recieveSocket, sendSocket;
@@ -62,6 +62,8 @@ public class Server {
 					com.printMessage("Sending message to Host:", sendPacket.getData());
 					com.sendPacket(sendPacket, sendSocket);
 				}
+				
+				
 			}else {
 				throw new IllegalArgumentException();
 			}
