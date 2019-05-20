@@ -10,7 +10,7 @@ public class ServerWorker extends Thread {
 	private DatagramSocket SendRecieveSocket; 
 	private ComFunctions com;
 	private int job, requestPort;
-	private byte[] fileByteArray;
+	private byte[] fileByteReadArray, fileByteWriteArray;
 
 	
 	
@@ -43,16 +43,24 @@ public class ServerWorker extends Thread {
 	}
 	
 	
-	private void serve() {
+	private void readServe() {
+		fileByteReadArray = com.readFileIntoArray("./server/" + fileName);
+		int blockNum = 1;
 		while(true){
+			SendingResponse = com.createPacket(com.getBlock(blockNum, fileByteReadArray), clientPort);
+			com.sendPacket(SendingResponse, SendRecieveSocket);
 			
 		}
 	}
 	
+	private void writeServe(){
+		
+	}
+	
 	public void run() {
 		decodePacket();
-		fileByteArray = com.readFileIntoArray("./files/" + fileName);
-		serve();
+		
+		
 		
 	}
 	
