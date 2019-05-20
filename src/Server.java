@@ -3,7 +3,7 @@ import java.net.DatagramSocket;
 import java.util.List;
 
 public class Server {
-	private final int BLOCK_SIZE = 512;
+	private final int REQUEST_SIZE = 100;
 	DatagramSocket recieveSocket, errorSocket;
 	DatagramPacket recievePacket, errorPacket;
 	ComFunctions com;
@@ -13,7 +13,7 @@ public class Server {
 	 */
 	public void serve() {
 		while(true) {
-			recievePacket = com.recievePacket(recieveSocket, BLOCK_SIZE);
+			recievePacket = com.recievePacket(recieveSocket, REQUEST_SIZE); 
 			if (com.checkMessage(recievePacket.getData())) {
 				ServerWorker worker = new ServerWorker(Integer.toString((recievePacket.getPort())), recievePacket);
 				worker.run();
@@ -30,7 +30,7 @@ public class Server {
 		// TODO Auto-generated constructor stub
 		com = new ComFunctions();
 		recieveSocket = com.startSocket(69);
-		recievePacket = com.createPacket(BLOCK_SIZE);
+		//recievePacket = com.createPacket(BLOCK_SIZE);
 		ServerExitListener exit = new ServerExitListener("Exit listener");
 		exit.run();
 	}

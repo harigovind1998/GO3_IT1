@@ -1,20 +1,21 @@
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.Arrays;
+
 public class ServerWorker extends Thread {
 	private final int BLOCK_SIZE = 512;
 	private DatagramPacket initialPacket, RecievedResponse, SendingResponse;
 	private int clientPort;
-	private String fileName; 
+	private String fileName, mode; 
 	private DatagramSocket SendRecieveSocket; 
 	private ComFunctions com;
-	private int job, requestPort; //
+	private int job, requestPort;
+	private byte[] fileByteArray;
 
 	
 	
 	private void getFileName() {
 		byte[] data = initialPacket.getData();
-		fileName = "";
 		int[] secondZero = {3,0,0};
 		int track = 1;
 		for(int i = 3; i<data.length ; i ++) {
@@ -26,14 +27,14 @@ public class ServerWorker extends Thread {
 				}
 			}
 		}
-		
-		byte[] file = Arrays.copyOfRange(data, 4 , secondZero[1]-1);
-		byte[] mode = Arrays.copyOfRange(data, secondZero[1]+1, secondZero[2]-1);
-		System.out.println(new String(file));
+		byte[] file = Arrays.copyOfRange(data, 2 , secondZero[1]);
+		byte[] mode = Arrays.copyOfRange(data, secondZero[1]+1, secondZero[2]);
+		this.fileName = new String(file);
+		this.mode = new String(mode);
 	}
 	
 	
-	private void determineJob() {
+	private void decodePacket() {
 		job = initialPacket.getData()[1]; //format of the message has been checked so second bit will determine if the request is a read or write
 		requestPort = initialPacket.getPort();
 		getFileName();
@@ -49,7 +50,8 @@ public class ServerWorker extends Thread {
 	}
 	
 	public void run() {
-		determineJob();
+		decodePacket();
+		fileByteArray = com.readFileIntoArray("./files/" + fileName);
 		serve();
 		
 	}
