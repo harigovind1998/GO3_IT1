@@ -9,11 +9,13 @@ public class ServerWorker extends Thread {
 	private String fileName, mode; 
 	private DatagramSocket SendRecieveSocket; 
 	private ComFunctions com;
-	private int job, requestPort;
-	private byte[] fileByteReadArray, fileByteWriteArray;
+	private int job;
+	//private byte[] fileByteReadArray, fileByteWriteArray;
 
 	
-	
+	/**
+	 * Gets the name of the file that is being written into or read from
+	 */
 	private void getFileName() {
 		byte[] data = initialPacket.getData();
 		int[] secondZero = {3,0,0};
@@ -33,23 +35,33 @@ public class ServerWorker extends Thread {
 		this.mode = new String(mode);
 	}
 	
-	
+	/**
+	 * Decodes the incoming packet to get the necessary information, namely the file name and weather the its a read or write request
+	 */
 	private void decodePacket() {
 		job = initialPacket.getData()[1]; //format of the message has been checked so second bit will determine if the request is a read or write
-		requestPort = initialPacket.getPort();
+		clientPort = initialPacket.getPort();	
 		getFileName();
-		
-		
 	}
 	
 	
+	/**
+	 * Sends the contents over to the client
+	 */
 	private void readServe() {
-		fileByteReadArray = com.readFileIntoArray("./server/" + fileName);
+		byte [] fileByteReadArray = com.readFileIntoArray("./server/" + fileName);
 		int blockNum = 1;
 		while(true){
 			SendingResponse = com.createPacket(com.getBlock(blockNum, fileByteReadArray), clientPort);
 			com.sendPacket(SendingResponse, SendRecieveSocket);
-			
+			RecievedResponse = com.recievePacket(SendRecieveSocket, 100);
+			if(!com.CheckAck(RecievedResponse, blockNum)) {
+				System.out.println("Wrong block recieved");
+			}
+			if(SendingResponse.getData()[SendingResponse.getLength() -1] == 0){
+				System.out.println("End of file reached");
+				break;
+			}
 		}
 	}
 	
@@ -57,21 +69,23 @@ public class ServerWorker extends Thread {
 		
 	}
 	
+	/**
+	 * decodes and then performs the necessary task
+	 */
 	public void run() {
 		decodePacket();
-		
-		
-		
+		if(job == 1) {
+			writeServe();
+		}else if (job ==2) {
+			readServe();
+		}
 	}
 	
 	public ServerWorker(String name, DatagramPacket packet ) {
 		// TODO Auto-generated constructor stub
 		com = new ComFunctions();
 		SendRecieveSocket = com.startSocket();
-		RecievedResponse = com.createPacket(BLOCK_SIZE);
 		initialPacket = packet;
-		clientPort  = packet.getPort();
-		
 		
 	}
 	

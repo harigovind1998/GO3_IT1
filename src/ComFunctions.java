@@ -1,11 +1,12 @@
 import java.io.IOException;
+
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 
 public class ComFunctions {
 	
@@ -150,8 +151,8 @@ public class ComFunctions {
 	}
 	
 	/**
-	 * Generates a message for the Data Packet used to sends data trough the Datagram
-	 * @param blockNumber block number being sent through the Datagram Packet
+	 * Generates a message for the Data Packet used to sends data trough the Data gram
+	 * @param blockNumber block number being sent through the Data gram Packet
 	 * @param block Data contained by the DatagramPacket with size <= 512
 	 * @return byte array of the message that can be used to create the DatagramPacket
 	 */
@@ -169,7 +170,7 @@ public class ComFunctions {
 	
 	/**
 	 * Generates an Acknowledge Response 
-	 * @param blockNumber Block number that has just been recieved
+	 * @param blockNumber Block number that has just been received
 	 * @return 
 	 */
 	public byte[] generateAckMessage(byte[] blockNumber) {
@@ -198,6 +199,7 @@ public class ComFunctions {
 		
 		return msg;
 	}
+	
 	/**
 	 * Prints out the contents of a packet
 	 * @param init initial message 
@@ -213,6 +215,7 @@ public class ComFunctions {
 		}
 		System.out.print("\n");
 	}
+	
 	/**
 	 * Checks to see if a byte array is on the required format read/write,text,0,text,0...0
 	 * @param msg message that is to be checked
@@ -254,32 +257,23 @@ public class ComFunctions {
 	 * @return byte array of the file contents
 	 */
 	public byte[] readFileIntoArray(String path) {
-		FileInputStream fileInputStream = null;
         byte[] bytesArray = null;
 
         try {
-
-            File file = new File(path);
-            bytesArray = new byte[(int) file.length()];
-
-            //read file into bytes[]
-            fileInputStream = new FileInputStream(file);
-            fileInputStream.read(bytesArray);
-
+        	bytesArray = Files.readAllBytes(Paths.get(path));
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (fileInputStream != null) {
-                try {
-                    fileInputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+            System.out.println("Couldnt read properly");
+        } 
         return bytesArray;
 	}
 	
+	/**
+	 * Get a block that is to be send through the socket
+	 * @param blockNumber block number that is needed
+	 * @param byteArray byteArray containing the file contents 
+	 * @return
+	 */
 	public byte[] getBlock(int blockNumber, byte[] byteArray) {
 		byte[] temp = new byte[512];
 		int len = byteArray.length;
@@ -293,5 +287,34 @@ public class ComFunctions {
 			track ++;
 		}
 		return temp;
+	}
+	
+	/**
+	 * Converts a number into a 2 bytes, has a range of 0 to 65535
+	 * @param num number to be converted
+	 * @return byte array
+	 */
+	public byte[] intToByte(int num) {
+		//Bit shifting operations so DW about it 
+		byte[] byteArr = new byte[2];
+		byteArr[0] = (byte) (num & 0xFF);
+		byteArr[1] = (byte) ((num>>>8)&0xFF);
+		return byteArr;
+		
+	}
+	
+	/**
+	 * Checks to see if the acknowledge packet is the one that is to be expected
+	 * @param packet Packet that has just come in
+	 * @param block block number that is expected
+	 * @return 
+	 */
+	public boolean CheckAck(DatagramPacket packet, int block) {
+		byte[] blockByte = intToByte(block);
+		if(packet.getData()[2] == blockByte[0] && packet.getData()[3] == blockByte[1]) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 }
