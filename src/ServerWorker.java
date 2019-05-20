@@ -7,6 +7,25 @@ public class ServerWorker extends Thread {
 	private String fileName; 
 	private DatagramSocket SendRecieveSocket; 
 	private ComFunctions com;
+	private int job, requestPort; //
+
+	
+	
+	private void getFileName() {
+		byte[] data = initialPacket.getData();
+		fileName = "";
+		
+	}
+	
+	
+	private void determineJob() {
+		job = initialPacket.getData()[1]; //format of the message has been checked so second bit will determine if the request is a read or write
+		requestPort = initialPacket.getPort();
+		getFileName();
+		
+		
+	}
+	
 	
 	private void serve() {
 		while(true){
@@ -15,14 +34,14 @@ public class ServerWorker extends Thread {
 	}
 	
 	public void run() {
-		
+		determineJob();
 		serve();
 		
 	}
 	
 	public ServerWorker(String name, DatagramPacket packet ) {
 		// TODO Auto-generated constructor stub
-		com = new  ComFunctions();
+		com = new ComFunctions();
 		SendRecieveSocket = com.startSocket();
 		RecievedResponse = com.createPacket(BLOCK_SIZE);
 		initialPacket = packet;
