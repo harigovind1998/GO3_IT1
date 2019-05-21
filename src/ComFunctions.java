@@ -742,7 +742,45 @@ public class ComFunctions {
 		a.append("File Name: " + filename + "\n");
 		a.append("Mode: " + mode + "\n");
 	}
-		
+	
+	public void verboseMode(String status, byte[] packetType, int blockNum, int numBytes, JTextArea a) {
+		String type = null;
+		a.append("Packet " + status + "\n");
+		if(packetType[0] ==  (byte)0 && packetType[1] == (byte)1) {
+			type = "RRQ";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)2) {
+			type = "WRQ";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)3) {
+			type = "DATA";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)4) {
+			type = "ACK";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)5) {
+			type = "ERROR";
+		}
+		a.append(type + "\n");
+		a.append("Block Number: " + Integer.toString(blockNum) + "\n");
+		a.append("Block Size: " + Integer.toString(numBytes) + "\n");
+	}
+	
+	public void verboseMode(String status, byte[] packetType, byte[] blockNum, int numBytes, JTextArea a) {
+		String type = null;
+		a.append("Packet " + status + "\n");
+		if(packetType[0] ==  (byte)0 && packetType[1] == (byte)1) {
+			type = "RRQ";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)2) {
+			type = "WRQ";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)3) {
+			type = "DATA";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)4) {
+			type = "ACK";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)5) {
+			type = "ERROR";
+		}
+		a.append(type + "\n");
+		a.append("Block Number: " + new String(blockNum) + "\n");
+		a.append("Block Size: " + Integer.toString(numBytes) + "\n");
+	}
+	
 	public byte[] parsePacketType(byte[] packetType) {
 		byte[] type = new byte[2];
 		if(packetType[0] ==  (byte)0 && packetType[1] == (byte)1) {
