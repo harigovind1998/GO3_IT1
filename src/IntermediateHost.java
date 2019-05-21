@@ -5,7 +5,7 @@ public class IntermediateHost {
 	DatagramSocket clientRecieveSocket, clientSendSocket, sendRecieveSocket;
 	DatagramPacket clientRecievePacket, clientSendPacket, serverSendPacket, serverRecievePacket;
 	ComFunctions com;
-	
+	int port = 69;
 	/**
 	 * Waits to recieve a message from the client and passes that on to the server
 	 */
@@ -17,7 +17,7 @@ public class IntermediateHost {
 			
 			com.printMessage("Recieved message from client:", clientRecievePacket.getData());
 			
-			serverSendPacket = com.createPacket(clientRecievePacket.getData(), 69);
+			serverSendPacket = com.createPacket(clientRecievePacket.getData(), port);
 			
 			com.printMessage("Sending message to Server:", serverSendPacket.getData());
 			
@@ -25,6 +25,8 @@ public class IntermediateHost {
 			
 			//Listens to the server response, and forwards that on to the client in the reverse manner, printing each each of the messages
 			serverRecievePacket = com.recievePacket(sendRecieveSocket,com.KNOWNLEN);
+			
+			port = serverRecievePacket.getPort();
 			
 			com.printMessage("Recieved message from Server:", serverRecievePacket.getData());
 			
