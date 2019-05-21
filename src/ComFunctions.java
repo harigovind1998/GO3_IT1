@@ -684,4 +684,18 @@ public class ComFunctions {
 			return false;
 		}
 	}
+	
+	/**
+	 * Takes the packet sent and parses out the data
+	 * @param arr the array of bytes being sent
+	 * @return data only the data of the array sent
+	 */
+	public byte[] parseBlockData(byte[] arr) {
+		byte[] data = new byte[arr.length-4];
+		for(int i = 4; i < arr.length; i++) {
+			data[i-4] = arr[i];
+		}
+		return data;
+		
+	}
 }
