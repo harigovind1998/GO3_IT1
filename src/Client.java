@@ -6,7 +6,7 @@ import java.net.DatagramSocket;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
+import java.lang.Math; 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -22,6 +22,7 @@ public class Client {
 	private static byte[] messageReceived;
 	private static Path f1path = FileSystems.getDefault().getPath("SYSC3303", "test.txt");
 	private static Path f2path = FileSystems.getDefault().getPath("SYSC3303", "returnTest.txt");
+	private static File fileToSend = new File("C:\\Users\\noric\\Documents\\SYSC3303\\test.txt");
 	
 	public Client() {
 		// TODO Auto-generated constructor stub
@@ -86,16 +87,25 @@ public class Client {
 	 * @param file file name 
 	 * @param format format of file
 	 */
-	public void sendMesage(byte[] type, byte[] file, String format) {
+	public void sendMesage(byte[] type, File file, String format) {
 		//generating the message in byte format
-		byte[] msg = com.generateMessage(type, file, format);
-		
-		com.printMessage("Sending Message:", msg);
-		
-		DatagramPacket sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
-		
-		com.sendPacket(sendPacket, sendRecieveSocket); 
-		
+		byte[] fileAsByteArr;
+		try {
+			fileAsByteArr = Files.readAllBytes(file.toPath());
+			int fileLength = fileAsByteArr.length;
+			int numOfBlocks = (int) Math.ceil(fileLength / 512);
+			for(int i = 0; i < numOfBlocks; i++) {
+				byte[] fileBlock = com.getBlock(i, fileAsByteArr);
+				byte[] msg = com.generateMessage(type, fileBlock, format);
+				com.printMessage("Sending Message:", msg);
+				DatagramPacket sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
+				com.sendPacket(sendPacket, sendRecieveSocket); 
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, com.KNOWNLEN);
 		
 		messageReceived = recievePacket.getData();
@@ -107,7 +117,7 @@ public class Client {
 	
 	public static void main(String[] args) {
 		Client client = new Client();
-		client.sendMesage(new byte[] {0,1}, fileToByte("C:\\Users\\noric\\Documents\\SYSC3303\\test.txt"), "Ascii");
+		client.sendMesage(new byte[] {0,1}, fileToSend, "Ascii");
 		
 		try {
 			byte[] fileReceived = Files.readAllBytes(f2path);
