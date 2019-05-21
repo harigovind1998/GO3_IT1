@@ -333,7 +333,6 @@ public class ComFunctions {
 	public final int KNOWNLEN = 4;
 	public final int UNKNOWNLEN = 100;
 	private final static char[] hexArr = "0123456789ABCDEF".toCharArray();
-	public int fileLength;
 	
 	/**
 	 * Recieves a packet on the specified socket 
@@ -455,7 +454,6 @@ public class ComFunctions {
 		
 		for(byte c : file) {
 			msg[track] = c; 
-			fileLength++;
 			track ++;
 		}
 		
