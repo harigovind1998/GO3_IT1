@@ -25,6 +25,8 @@ public class Client {
 	private static Path f1path = FileSystems.getDefault().getPath("SYSC3303", "test.txt");
 	private static Path f2path = FileSystems.getDefault().getPath("SYSC3303", "returnTest.txt");
 	private static File fileToSend = new File("C:\\Users\\noric\\Documents\\SYSC3303\\test.txt");
+	private int fileLength;
+	private byte[] fileContent = new byte[fileLength]
 	
 	public Client() {
 		// TODO Auto-generated constructor stub
@@ -65,7 +67,7 @@ public class Client {
 		File file = new File(path);
 		FileInputStream fileInputStream = null;
         byte[] bytesArray = null;
-		try {
+	try {
             fileInputStream = new FileInputStream(file);
             fileInputStream.read(bytesArray);
         } catch (IOException e) {
@@ -90,7 +92,7 @@ public class Client {
 		byte[] fileAsByteArr;
 		try {
 			fileAsByteArr = Files.readAllBytes(file.toPath());
-			int fileLength = fileAsByteArr.length;
+			fileLength = fileAsByteArr.length;
 			int numOfBlocks = (int) Math.ceil(fileLength / 512);
 			for(int i = 0; i < numOfBlocks; i++) {
 				byte[] fileBlock = com.getBlock(i, fileAsByteArr);
