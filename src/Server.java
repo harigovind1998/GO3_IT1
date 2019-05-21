@@ -16,7 +16,7 @@ public class Server {
 			recievePacket = com.recievePacket(recieveSocket, REQUEST_SIZE); 
 			if (com.checkMessage(recievePacket.getData())) {
 				ServerWorker worker = new ServerWorker(Integer.toString((recievePacket.getPort())), recievePacket);
-				worker.run();
+				worker.start();
 			}else {
 				errorPacket = com.createPacket(com.generateErrMessage(new byte[] {0, 0}, "The Read or write request was of invalid format"),recievePacket.getPort());
 				errorSocket = com.startSocket();
@@ -32,7 +32,7 @@ public class Server {
 		recieveSocket = com.startSocket(69);
 		//recievePacket = com.createPacket(BLOCK_SIZE);
 		ServerExitListener exit = new ServerExitListener("Exit listener");
-		exit.run();
+		exit.start();
 	}
 
 	
@@ -41,3 +41,4 @@ public class Server {
 		server.serve();
 	}
 }
+
