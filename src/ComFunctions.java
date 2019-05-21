@@ -657,7 +657,7 @@ public class ComFunctions {
 		byte[] temp = new byte[512];
 		int len = byteArray.length;
 		int track = 0;
-		for(int i = ((blockNumber - 1) * 512); i < ((blockNumber ) * 512); i ++) {
+		for(int i = ((blockNumber - 1) * 512); i < ((blockNumber) * 512); i++) {
 			if(i < len) {
 				temp[track] = byteArray[i];
 			} else {

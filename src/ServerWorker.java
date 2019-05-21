@@ -47,7 +47,6 @@ public class ServerWorker extends Thread {
 		getFileName();
 	}
 	
-	
 	/**
 	 * Sends the contents over to the client
 	 */
@@ -70,7 +69,7 @@ public class ServerWorker extends Thread {
 				System.out.println("End of file reached");
 				break;
 			}
-			blockNum ++ ;
+			blockNum++;
 		}
 	}
 	
@@ -78,19 +77,15 @@ public class ServerWorker extends Thread {
 	 * Sends ACK packet to client (after WRQ)
 	 */
 	private void writeServe() {
-		int blockNum = 1;
+		int blockNum = 0;
 		while (true) {
 			SendingResponse = com.createPacket(com.generateAckMessage(com.intToByte(blockNum)), clientPort);
 			com.sendPacket(SendingResponse, SendRecieveSocket);
 			RecievedResponse = com.recievePacket(SendRecieveSocket, BLOCK_SIZE);
-			com.writeArrayIntoFile(RecievedResponse.getData(), FileSystems.getDefault().getPath("./server/", fileName));
-			if (!com.CheckData(RecievedResponse, blockNum)) {
-				System.out.println("Wrong block received");
-			}
-			if (SendingResponse.getData()[SendingResponse.getLength() - 1] == 0){
-				System.out.println("End of file reached");
-				break;
-			}
+			com.writeArrayIntoFile(com.getBlock(blockNum, RecievedResponse.getData()), FileSystems.getDefault().getPath("./server/", fileName));
+//			if (!com.CheckData(RecievedResponse, blockNum)) {
+//				System.out.println("Wrong block received");
+//			}
 			++blockNum;
 		}
 	}

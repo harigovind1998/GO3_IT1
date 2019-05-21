@@ -18,7 +18,7 @@ public class Server {
 				System.out.println("Starting ServerWorker");
 				ServerWorker worker = new ServerWorker(Integer.toString((recievePacket.getPort())), recievePacket);
 				worker.start();
-			}else {
+			} else {
 				System.out.println("Error Packet");
 				errorPacket = com.createPacket(com.generateErrMessage(new byte[] {0, 0}, "The Read or write request was of invalid format"),recievePacket.getPort());
 				errorSocket = com.startSocket();
