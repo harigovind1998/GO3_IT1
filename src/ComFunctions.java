@@ -1,11 +1,12 @@
 import java.io.IOException;
-
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 
 public class ComFunctions {
@@ -85,7 +86,7 @@ public class ComFunctions {
 	 * @param port port number of the destination socket
 	 * @return DatagramPacket that can be used for sending
 	 */
-	public DatagramPacket createPacket(byte[] msg, int port ) {
+	public DatagramPacket createPacket(byte[] msg, int port) {
 		DatagramPacket sendPacket = null;
 		try {
 			sendPacket = new DatagramPacket(msg, msg.length, InetAddress.getLocalHost(), port);
@@ -174,7 +175,7 @@ public class ComFunctions {
 	 * @return 
 	 */
 	public byte[] generateAckMessage(byte[] blockNumber) {
-		byte[] msg = new byte[] {0,4,blockNumber[0], blockNumber[1]};
+		byte[] msg = new byte[] {0, 4, blockNumber[0], blockNumber[1]};
 		return msg;
 	}
 	
@@ -269,6 +270,20 @@ public class ComFunctions {
 	}
 	
 	/**
+	 * Writes a byte array into a file.
+	 * @param bytesArray Bytes to be written into file
+	 * @param path File path
+	 */
+	public void writeArrayIntoFile(byte[] bytesArray, Path path) {
+		try {
+			Files.write(path, bytesArray, StandardOpenOption.APPEND);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * Get a block that is to be send through the socket
 	 * @param blockNumber block number that is needed
 	 * @param byteArray byteArray containing the file contents 
@@ -314,6 +329,21 @@ public class ComFunctions {
 		if(packet.getData()[2] == blockByte[0] && packet.getData()[3] == blockByte[1]) {
 			return true;
 		}else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Checks to see if the DATA packet is the one that is to be expected.
+	 * @param packet Received packet
+	 * @param blockNum Block number that is to be expected
+	 * @return True if the actual packet matches with the expected, else false.
+	 */
+	public boolean CheckData(DatagramPacket packet, byte[] blockNum) {
+		//byte[] blockByte = intToByte(block);
+		if (packet.getData()[2] == blockNum[0] && packet.getData()[3] == blockNum[1] && packet.getData().length <= 513) {
+			return true;
+		} else {
 			return false;
 		}
 	}

@@ -36,7 +36,7 @@ public class ServerWorker extends Thread {
 	}
 	
 	/**
-	 * Decodes the incoming packet to get the necessary information, namely the file name and weather the its a read or write request
+	 * Decodes the incoming packet to get the necessary information, namely the file name and whether the its a read or write request
 	 */
 	private void decodePacket() {
 		job = initialPacket.getData()[1]; //format of the message has been checked so second bit will determine if the request is a read or write
@@ -65,8 +65,23 @@ public class ServerWorker extends Thread {
 		}
 	}
 	
-	private void writeServe(){
-		
+	/**
+	 * Sends ACK packet to client (after WRQ)
+	 */
+	private void writeServe() {
+		byte[] blockNum = new byte[2];
+		while (true) {
+			SendingResponse = com.createPacket(com.generateAckMessage(blockNum), clientPort);
+			com.sendPacket(SendingResponse, SendRecieveSocket);
+			RecievedResponse = com.recievePacket(SendRecieveSocket, BLOCK_SIZE);
+			if (!com.CheckData(RecievedResponse, blockNum)) {
+				System.out.println("Wrong block received");
+			}
+			if (SendingResponse.getData()[SendingResponse.getLength() - 1] == 0){
+				System.out.println("End of file reached");
+				break;
+			}
+		}
 	}
 	
 	/**
@@ -81,7 +96,7 @@ public class ServerWorker extends Thread {
 		}
 	}
 	
-	public ServerWorker(String name, DatagramPacket packet ) {
+	public ServerWorker(String name, DatagramPacket packet) {
 		// TODO Auto-generated constructor stub
 		com = new ComFunctions();
 		SendRecieveSocket = com.startSocket();
