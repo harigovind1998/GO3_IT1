@@ -25,6 +25,8 @@ public class Client {
 	private static File fileToSend = new File("C:\\Users\\noric\\Documents\\SYSC3303\\test.txt");
 	private int fileLength;
 	private byte[] fileContent = new byte[fileLength];
+	private static byte[] rrq = {0,1};
+	private static byte[] wrq = {0,2};
 	
 	public Client() {
 		// TODO Auto-generated constructor stub
@@ -118,8 +120,56 @@ public class Client {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
+	}
+	
+	public void writeFile(String name, String format) {
+		byte[] fileAsByteArr = com.readFileIntoArray(name);
+		fileLength = fileAsByteArr.length;
+		int numOfBlocks = (int) Math.ceil(fileLength / 512);
+		for(int i = 0; i < numOfBlocks; i++) {
+			byte[] fileBlock = com.getBlock(i+1, fileAsByteArr);
+			byte[] msg = com.generateMessage(wrq, fileBlock, format);
+			com.printMessage("Sending Message:", msg);
+			DatagramPacket sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
+			com.sendPacket(sendPacket, sendRecieveSocket);
+			
+			DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, com.KNOWNLEN);
+			if(com.CheckAck(recievePacket, i)) {
+				messageReceived = recievePacket.getData();
+				com.guiPrintArr("Recieved message from Host:", messageReceived, area);
+			}else {
+				System.out.println("Wrong Packet Received");
+			}
+		}
+	}
+	
+	public void readFile(String name, String format) {
+		byte[] msg = com.generateMessage(rrq, name, format);
+		int blockNum = 1;
+		com.printMessage("Sending Message:", msg);
+		DatagramPacket sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
+		com.sendPacket(sendPacket, sendRecieveSocket);
+		
+		outerloop:
+		while(true) {
+			DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, 512);
+			if(com.CheckAck(recievePacket, blockNum)) {
+				blockNum++;
+				messageReceived = recievePacket.getData();
+				byte[] dataReceived = com.parseBlockData(messageReceived);
+				System.arraycopy(dataReceived, 0, fileContent, 0, dataReceived.length);
+				byte[] ackMsg = com.generateAckMessage(com.intToByte(blockNum));
+				DatagramPacket ackPacket = com.createPacket(ackMsg, 23);
+				com.sendPacket(ackPacket, sendRecieveSocket);
+				
+				//check to see if the bloc size is < 512, and if it is, break	
+				if(dataReceived[511] == (byte)0) {
+					break outerloop;
+				}
+			}else {
+				System.out.println("Wrong Packet Received");
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
