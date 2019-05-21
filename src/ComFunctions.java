@@ -678,7 +678,7 @@ public class ComFunctions {
 	 */
 	public boolean CheckAck(DatagramPacket packet, int block) {
 		byte[] blockByte = intToByte(block);
-		if(packet.getData()[2] == blockByte[0] && packet.getData()[3] == blockByte[1]) {
+		if(packet.getData()[2] == blockByte[0] && packet.getData()[3] == blockByte[1] && packet.getData()[0]==0 && packet.getData()[1]==4) {
 			return true;
 		}else {
 			return false;

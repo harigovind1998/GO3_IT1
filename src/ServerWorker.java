@@ -53,7 +53,6 @@ public class ServerWorker extends Thread {
 		int blockNum = 1;
 		while(true){
 			byte[] msg = com.generateDataPacket(com.intToByte(blockNum), com.getBlock(blockNum, fileByteReadArray));
-			
 			SendingResponse = com.createPacket(msg, clientPort);
 			com.sendPacket(SendingResponse, SendRecieveSocket);
 			RecievedResponse = com.recievePacket(SendRecieveSocket, 100);
