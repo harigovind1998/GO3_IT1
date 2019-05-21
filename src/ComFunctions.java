@@ -693,4 +693,63 @@ public class ComFunctions {
 		return data;
 		
 	}
+	
+	public void verboseMode(String status, byte[] packetType, String filename, String mode, JTextArea a) {
+		String type = null;
+		a.append("Packet " + status + "\n");
+		if(packetType[0] ==  (byte)0 && packetType[1] == (byte)1) {
+			type = "RRQ";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)2) {
+			type = "WRQ";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)3) {
+			type = "DATA";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)4) {
+			type = "ACK";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)5) {
+			type = "ERROR";
+		}
+		a.append(type + "\n");
+		a.append("File Name: " + filename + "\n");
+		a.append("Mode: " + mode + "\n");
+	}
+	
+	public void verboseMode(String status, byte[] packetType, int blockNum, int numBytes, JTextArea a) {
+		String type = null;
+		a.append("Packet " + status + "\n");
+		if(packetType[0] ==  (byte)0 && packetType[1] == (byte)1) {
+			type = "RRQ";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)2) {
+			type = "WRQ";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)3) {
+			type = "DATA";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)4) {
+			type = "ACK";
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)5) {
+			type = "ERROR";
+		}
+		a.append(type + "\n");
+		a.append("Block Number: " + Integer.toString(blockNum) + "\n");
+		a.append("Block Size: " + Integer.toString(numBytes) + "\n");
+	}
+	
+	public byte[] parsePacketType(byte[] packetType) {
+		byte[] type = new byte[2];
+		if(packetType[0] ==  (byte)0 && packetType[1] == (byte)1) {
+			type[0] = 0;
+			type[1] = 1;
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)2) {
+			type[0] = 0;
+			type[1] = 2;
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)3) {
+			type[0] = 0;
+			type[1] = 3;
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)4) {
+			type[0] = 0;
+			type[1] = 4;
+		} else if (packetType[0] ==  (byte)0 && packetType[1] == (byte)5) {
+			type[0] = 0;
+			type[1] = 5;
+		}
+		return type;
+	}
 }
