@@ -30,12 +30,13 @@ public class Client {
 		// TODO Auto-generated constructor stub
 		com = new ComFunctions();
 		sendRecieveSocket = com.startSocket();
-		frame.setSize(420, 440);
+		frame.setSize(380, 380);
 		area.setBounds(10, 10, 380, 380);
 		scroll.setSize(400, 400);
 		scroll.add(area);
 		frame.getContentPane().add(scroll);
 		frame.setLayout(null);
+		//frame.setResizable(false);
 		frame.setVisible(true);
 	}
 	
