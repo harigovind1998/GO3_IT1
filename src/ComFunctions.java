@@ -156,7 +156,7 @@ public class ComFunctions {
 	 * @param block Data contained by the DatagramPacket with size <= 512
 	 * @return byte array of the message that can be used to create the DatagramPacket
 	 */
-	public byte[] generateDataMessage(byte[] blockNumber, byte[] block) {
+	public byte[] generateDataPacket(byte[] blockNumber, byte[] block) {
 		byte[] msg = new byte[2 + blockNumber.length + block.length];
 		msg[0]= 0;
 		msg[1]= 3;
@@ -278,7 +278,7 @@ public class ComFunctions {
 		byte[] temp = new byte[512];
 		int len = byteArray.length;
 		int track = 0;
-		for(int i = ((blockNumber - 1) * 512); i < ((blockNumber - 1) * 512 - 512); i ++) {
+		for(int i = ((blockNumber - 1) * 512); i < ((blockNumber ) * 512); i ++) {
 			if(track < len) {
 				temp[track] = byteArray[i];
 			}else {
