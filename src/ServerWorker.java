@@ -52,7 +52,7 @@ public class ServerWorker extends Thread {
 	 */
 	private void readServe() {
 		System.out.println("Sending Data");
-		byte [] fileByteReadArray = com.readFileIntoArray("./server/" + fileName);
+		byte [] fileByteReadArray = com.readFileIntoArray("./Server/" + fileName);
 		com.printMessage("File contains: ", fileByteReadArray);
 		int blockNum = 1;
 		while(true){

@@ -107,45 +107,51 @@ public class Client {
 	*/
 	
 	public void writeFile(String name, String format) {
-		byte[] fileAsByteArr = com.readFileIntoArray(name);
+		byte[] fileAsByteArr = com.readFileIntoArray("./Client/"+name);
 		
-		try {
-			Files.write(f1path, fileAsByteArr);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			Files.write(f1path, fileAsByteArr);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		fileLength = fileAsByteArr.length;
 		byte[] request = com.generateMessage(wrq, name, format);
+		DatagramPacket sendPacket =  null;
 		DatagramPacket requestPacket = com.createPacket(request, 23); //creating the datagram, specifying the destination port and message
 		com.sendPacket(requestPacket, sendRecieveSocket);
-		
+		DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, com.UNKNOWNLEN);
+		if(!com.CheckAck(recievePacket, 0)) {
+			System.out.println("Not the correct ACK packet");
+			System.exit(0);
+		}
 		if (mode == 1) {
 			com.verboseMode("Sent", wrq, name, format, area);
 		}
 		
+		byte[] fileBlock = null;
+		byte [] msg =  null;
 		int numOfBlocks = (int) Math.ceil(fileLength / 512);
-		for(int i = 0; i < numOfBlocks; i++) {
-			byte[] fileBlock = com.getBlock(i+1, fileAsByteArr);
-			byte[] msg = com.generateDataPacket(com.intToByte(i+1), fileBlock);
+		for(int i = 1; i < numOfBlocks; i++) {
+			fileBlock = com.getBlock(i, fileAsByteArr);
+			msg = com.generateDataPacket(com.intToByte(i), fileBlock);
 			com.printMessage("Sending Message:", msg);
-			DatagramPacket sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
-			com.sendPacket(sendPacket, sendRecieveSocket);
-			
+			sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
 			byteCounter = 0;
 			for(byte b: fileBlock) {
 				if(fileBlock[b] != (byte)0) {
 					byteCounter++;
 				}
 			}
+			com.sendPacket(sendPacket, sendRecieveSocket);	
 			
 			if(mode == 1) {
 				com.verboseMode("Sent", com.parsePacketType(msg), i+1, byteCounter, area);
 			}
 			
-			DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, com.KNOWNLEN);
-			if(com.CheckAck(recievePacket, i+1)) {
+			recievePacket = com.recievePacket(sendRecieveSocket, com.KNOWNLEN);
+			if(com.CheckAck(recievePacket, i)) {
 				messageReceived = recievePacket.getData();
 				com.guiPrintArr("Recieved message from Host:", messageReceived, area);
 				
