@@ -325,6 +325,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import javax.swing.*;
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -658,11 +659,10 @@ public class ComFunctions {
 	 * @return byte array
 	 */
 	public byte[] intToByte(int num) {
-		//Bit shifting operations so DW about it 
-		byte[] byteArr = new byte[2];
-		byteArr[0] = (byte) (num & 0xFF);
-		byteArr[1] = (byte) ((num>>>8)&0xFF);
-		return byteArr;
+		ByteBuffer dbuf = ByteBuffer.allocate(2);
+		dbuf.putShort((short)num);
+		byte[] bytes = dbuf.array();
+		return bytes;
 	}
 	
 	/**
@@ -747,7 +747,7 @@ public class ComFunctions {
 			type = "ERROR";
 		}
 		a.append(type + "\n");
-		a.append("Block Number: " + new String(blockNum) + "\n");
+		a.append("Block Number: " + ByteBuffer.wrap(blockNum).getShort() + "\n");
 		a.append("Block Size: " + Integer.toString(numBytes) + "\n");
 	}
 	

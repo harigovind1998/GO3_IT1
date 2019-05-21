@@ -167,6 +167,7 @@ public class Client {
 		DatagramPacket recievePacket =  null;
 		byte[] dataReceived = null;
 		if (mode == 1) {
+			System.out.println("sup");
 			com.verboseMode("Sent", rrq, name, format, area);
 		}
 		
@@ -218,7 +219,7 @@ public class Client {
 		System.out.println("Select Mode : Quiet [0], Verbose [1]");
 		mode = sc.nextInt();
 		sc.close();
-		
+		System.out.println(mode);
 		//client.sendMesage(new byte[] {0,1}, fileToSend, "Ascii");
 		client.readFile("test1.txt", "Ascii");
 		//client.writeFile("test.txt", "Ascii");

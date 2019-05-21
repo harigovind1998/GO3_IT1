@@ -1,5 +1,6 @@
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 public class ServerWorker extends Thread {
@@ -55,7 +56,7 @@ public class ServerWorker extends Thread {
 		com.printMessage("File contains: ", fileByteReadArray);
 		int blockNum = 1;
 		while(true){
-			System.out.println("Sending block " + blockNum);
+			System.out.println("Sending block " + ByteBuffer.wrap(com.intToByte(blockNum)).getShort());
 			byte[] msg = com.generateDataPacket(com.intToByte(blockNum), com.getBlock(blockNum, fileByteReadArray));
 			com.printMessage("Block contains: ", msg);
 			SendingResponse = com.createPacket(msg, clientPort);
