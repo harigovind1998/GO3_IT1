@@ -42,7 +42,8 @@ public class ServerWorker extends Thread {
 	 */
 	private void decodePacket() {
 		job = initialPacket.getData()[1]; //format of the message has been checked so second bit will determine if the request is a read or write
-		clientPort = initialPacket.getPort();	
+		clientPort = initialPacket.getPort();
+		System.out.print(clientPort);
 		getFileName();
 	}
 	
@@ -51,10 +52,14 @@ public class ServerWorker extends Thread {
 	 * Sends the contents over to the client
 	 */
 	private void readServe() {
+		System.out.println("Sending Data");
 		byte [] fileByteReadArray = com.readFileIntoArray("./server/" + fileName);
+		com.printMessage("File contains: ", fileByteReadArray);
 		int blockNum = 1;
 		while(true){
+			System.out.println("Sending block " + blockNum);
 			byte[] msg = com.generateDataPacket(com.intToByte(blockNum), com.getBlock(blockNum, fileByteReadArray));
+			com.printMessage("Block contains: ", msg);
 			SendingResponse = com.createPacket(msg, clientPort);
 			com.sendPacket(SendingResponse, SendRecieveSocket);
 			RecievedResponse = com.recievePacket(SendRecieveSocket, 100);
@@ -65,6 +70,7 @@ public class ServerWorker extends Thread {
 				System.out.println("End of file reached");
 				break;
 			}
+			blockNum ++ ;
 		}
 	}
 	
@@ -93,16 +99,24 @@ public class ServerWorker extends Thread {
 	 * decodes and then performs the necessary task
 	 */
 	public void run() {
+		System.out.println("Starting Decoding");
 		decodePacket();
 		if (job == 1) {
 			writeServe();
-		} else if (job ==2) {
-			readServe();
+		} 
+		else if (job ==2) {
+			if(job == 1) {
+				readServe();
+			} 
+			else if (job ==2) {
+				writeServe();
+			}
 		}
 	}
 	
 	public ServerWorker(String name, DatagramPacket packet) {
 		// TODO Auto-generated constructor stub
+		super(name);
 		com = new ComFunctions();
 		SendRecieveSocket = com.startSocket();
 		initialPacket = packet;
