@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -23,7 +22,6 @@ public class Client {
 	private static byte[] messageReceived;
 	private static Path f1path = FileSystems.getDefault().getPath("SYSC3303", "test.txt");
 	private static Path f2path = FileSystems.getDefault().getPath("SYSC3303", "returnTest.txt");
-	private static File fileToSend = new File("C:\\Users\\noric\\Documents\\SYSC3303\\test.txt");
 	private int fileLength;
 	private byte[] fileContent = new byte[fileLength];
 	private static byte[] rrq = {0,1};
@@ -65,36 +63,15 @@ public class Client {
         }
         return file;
     }
-	
-	public static byte[] fileToByte(String path) {
-		File file = new File(path);
-		FileInputStream fileInputStream = null;
-        byte[] bytesArray = null;
-		try {
-            fileInputStream = new FileInputStream(file);
-            fileInputStream.read(bytesArray);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fileInputStream != null) {
-                try {
-                    fileInputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-		return (bytesArray);
-	}
-	
+		
 	/**
 	 * Sends the specified message to the intermediate host and waits for a response
 	 * @param type read or write 
 	 * @param file file name 
 	 * @param format format of file
 	 */
-	public void sendMesage(byte[] type, File file, String format) {
+	/**
+    public void sendMesage(byte[] type, File file, String format) {
 		//generating the message in byte format
 		byte[] fileAsByteArr;
 		try {
@@ -124,9 +101,18 @@ public class Client {
 			e.printStackTrace();
 		}
 	}
+	*/
 	
 	public void writeFile(String name, String format) {
 		byte[] fileAsByteArr = com.readFileIntoArray(name);
+		
+		try {
+			Files.write(f1path, fileAsByteArr);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		fileLength = fileAsByteArr.length;
 		byte[] request = com.generateMessage(wrq, name, format);
 		DatagramPacket requestPacket = com.createPacket(request, 23); //creating the datagram, specifying the destination port and message
@@ -216,6 +202,12 @@ public class Client {
 				System.out.println("Wrong Packet Received");
 			}
 		}
+		try {
+			Files.write(f2path, fileContent);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -224,7 +216,10 @@ public class Client {
 		System.out.println("Select Mode : Quiet [0], Verbose [1]");
 		mode = sc.nextInt();
 		sc.close();
-		client.sendMesage(new byte[] {0,1}, fileToSend, "Ascii");
+		
+		//client.sendMesage(new byte[] {0,1}, fileToSend, "Ascii");
+		client.readFile("test.txt", "Ascii");
+		client.writeFile("test.txt", "Ascii");
 		
 		try {
 			byte[] fileReceived = Files.readAllBytes(f2path);
