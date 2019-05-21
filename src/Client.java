@@ -5,6 +5,8 @@ import java.net.DatagramSocket;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.lang.Math; 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -21,7 +23,8 @@ public class Client {
 	private static JScrollPane scroll = new JScrollPane(area);
 	private static byte[] messageReceived;
 	private static Path f1path = FileSystems.getDefault().getPath("SYSC3303", "test.txt");
-	private static Path f2path = FileSystems.getDefault().getPath("SYSC3303", "returnTest.txt");
+	//public static Path f2path = FileSystems.getDefault().getPath("SYSC3303", "returnTest.txt");
+	public static  Path  f2path = Paths.get("./Client/returnTest.txt");
 	private int fileLength;
 	private byte[] fileContent = new byte[fileLength];
 	private static byte[] rrq = {0,1};
@@ -157,57 +160,56 @@ public class Client {
 	
 	public void readFile(String name, String format) {
 		byte[] msg = com.generateMessage(rrq, name, format);
-		int blockNum = 1;
+		byte[] blockNum =  new byte[2];
 		com.printMessage("Sending Message:", msg);
 		DatagramPacket sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
 		com.sendPacket(sendPacket, sendRecieveSocket);
-		
+		DatagramPacket recievePacket =  null;
+		byte[] dataReceived = null;
 		if (mode == 1) {
 			com.verboseMode("Sent", rrq, name, format, area);
 		}
 		
 		outerloop:
 		while(true) {
-			DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, 512);
-			if(com.CheckAck(recievePacket, blockNum)) {
-				blockNum++;
-				messageReceived = recievePacket.getData();
-				byte[] dataReceived = com.parseBlockData(messageReceived);
-				
-				byteCounter = 0;
-				for(byte b: dataReceived) {
-					if(dataReceived[b] != (byte)0) {
-						byteCounter++;
-					}
+			recievePacket = com.recievePacket(sendRecieveSocket, 516);
+			messageReceived = recievePacket.getData();
+			//Add check  to see if the packet is a data Packet
+			blockNum[0] =  messageReceived[2];
+			blockNum[1] = messageReceived[3];
+			dataReceived = com.parseBlockData(messageReceived);
+			byteCounter = 0;
+			for(byte b: dataReceived) {
+				if(dataReceived[b] != (byte)0) {
+					byteCounter++;
 				}
-				
-				if (mode == 1) {
-					com.verboseMode("Received", com.parsePacketType(dataReceived), blockNum, byteCounter, area);
-				}
-				
-				System.arraycopy(dataReceived, 0, fileContent, 0, dataReceived.length);
-				byte[] ackMsg = com.generateAckMessage(com.intToByte(blockNum));
-				DatagramPacket ackPacket = com.createPacket(ackMsg, 23);
-				com.sendPacket(ackPacket, sendRecieveSocket);
-				
-				if (mode == 1) {
-					com.verboseMode("Sent", com.parsePacketType(ackMsg), blockNum, byteCounter, area);
-				}
-				
-				//check to see if the bloc size is < 512, and if it is, break	
-				if(dataReceived[511] == (byte)0) {
-					break outerloop;
-				}
-			}else {
-				System.out.println("Wrong Packet Received");
 			}
+				
+			if (mode == 1) {
+				com.verboseMode("Received", com.parsePacketType(dataReceived), blockNum, byteCounter, area);
+			}
+			//This bit takes a lot of  time so we need  to implement a buffered write, which i  don't have time for rn
+			try {
+				Files.write(f2path, dataReceived, StandardOpenOption.APPEND);
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+				//System.arraycopy(dataReceived, 0, fileContent, 0, dataReceived.length);
+			byte[] ackMsg = com.generateAckMessage(blockNum);
+			DatagramPacket ackPacket = com.createPacket(ackMsg, 23);
+			com.sendPacket(ackPacket, sendRecieveSocket);
+			
+			if (mode == 1) {
+				com.verboseMode("Sent", com.parsePacketType(ackMsg), blockNum, byteCounter, area);
+			}
+				
+			//check to see if the bloc size is < 512, and if it is, break	
+			if(dataReceived[511] == (byte)0) {
+				break outerloop;
+			}
+			
 		}
-		try {
-			Files.write(f2path, fileContent);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 	
 	public static void main(String[] args) {
@@ -218,28 +220,29 @@ public class Client {
 		sc.close();
 		
 		//client.sendMesage(new byte[] {0,1}, fileToSend, "Ascii");
-		client.readFile("test.txt", "Ascii");
-		client.writeFile("test.txt", "Ascii");
+		client.readFile("test1.txt", "Ascii");
+		//client.writeFile("test.txt", "Ascii");
 		
-		try {
-			byte[] fileReceived = Files.readAllBytes(f2path);
-			byte[] fileSent = Files.readAllBytes(f1path);
-			
-			int isSame = 0;
-			for(byte b : fileSent) {
-				if(fileReceived[b] != fileSent[b]) {
-					isSame++; 
-				}
-			}
-			
-			if(isSame != 0 ) {
-				area.append("Files do not match");
-			} else {
-				area.append("Files Match!");
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			byte[] fileReceived = Files.readAllBytes(f2path);
+//			byte[] fileSent = Files.readAllBytes(f1path);
+//			
+//			int isSame = 0;
+//			for(byte b : fileSent) {
+//				if(fileReceived[b] != fileSent[b]) {
+//					isSame++; 
+//				}
+//			}
+//			
+//			if(isSame != 0 ) {
+//				area.append("Files do not match");
+//			} else {
+//				area.append("Files Match!");
+//			}
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
 	}
 }

@@ -13,7 +13,7 @@ public class IntermediateHost {
 		while(true) {
 			
 			//Recieving a message to from the client, prints the message, created a new packet to send to the server, prints that message for clarification and sends it the server
-			clientRecievePacket = com.recievePacket(clientRecieveSocket, com.UNKNOWNLEN);
+			clientRecievePacket = com.recievePacket(clientRecieveSocket, 516);
 			
 			com.printMessage("Recieved message from client:", clientRecievePacket.getData());
 			
@@ -24,7 +24,7 @@ public class IntermediateHost {
 			com.sendPacket(serverSendPacket, sendRecieveSocket);
 			
 			//Listens to the server response, and forwards that on to the client in the reverse manner, printing each each of the messages
-			serverRecievePacket = com.recievePacket(sendRecieveSocket,com.KNOWNLEN);
+			serverRecievePacket = com.recievePacket(sendRecieveSocket,516);
 			
 			port = serverRecievePacket.getPort();
 			
