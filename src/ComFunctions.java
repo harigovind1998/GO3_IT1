@@ -585,19 +585,16 @@ public class ComFunctions {
 					break;
 				}
 			}
-			
 			//checks to ensure the rest of the message are only 0's
 			for(;i<msg.length; i++) {
 				if(msg[i] != 0) {
 					return false;
 				}
 			}
-				return true;
-			
+				return true;	
 		} else {
 			return false;
 		}
-		
 	}
 	
 	/**

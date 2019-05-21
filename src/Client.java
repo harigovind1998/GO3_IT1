@@ -13,9 +13,11 @@ import javax.swing.JTextArea;
 import java.io.FileOutputStream; 
 import java.io.OutputStream; 
 
+
 public class Client {
 	ComFunctions com;
 	DatagramSocket sendRecieveSocket;
+
 	private static JFrame frame = new JFrame();
 	private static JTextArea area = new JTextArea();
 	private static JScrollPane scroll = new JScrollPane(area);
@@ -23,7 +25,6 @@ public class Client {
 	private static Path f1path = FileSystems.getDefault().getPath("SYSC3303", "test.txt");
 	private static Path f2path = FileSystems.getDefault().getPath("SYSC3303", "returnTest.txt");
 	private static File fileToSend = new File("C:\\Users\\noric\\Documents\\SYSC3303\\test.txt");
-	private byte[] fileContent = new byte[com.fileLength];
 	
 	public Client() {
 		// TODO Auto-generated constructor stub
@@ -81,13 +82,9 @@ public class Client {
         }
 		return (bytesArray);
 	}
+
 	
-	/**
-	 * Sends the specified message to the intermediate host and waits for a response
-	 * @param type read or write 
-	 * @param file file name 
-	 * @param format format of file
-	 */
+
 	public void sendMesage(byte[] type, File file, String format) {
 		//generating the message in byte format
 		byte[] fileAsByteArr;
@@ -100,29 +97,26 @@ public class Client {
 				byte[] msg = com.generateMessage(type, fileBlock, format);
 				com.printMessage("Sending Message:", msg);
 				DatagramPacket sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
-				com.sendPacket(sendPacket, sendRecieveSocket);
-				
-				DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, com.KNOWNLEN);
-				if(com.CheckAck(recievePacket, i)) {
-					messageReceived = recievePacket.getData();
-					com.guiPrintArr("Recieved message from Host:", messageReceived, area);
-					
-					byte[] dataArr = com.parseBlockData(messageReceived);
-					System.arraycopy(dataArr, 0, fileContent, 0, com.fileLength);
-				}else {
-					System.out.println("Wrong Packet Received");
-				}
+				com.sendPacket(sendPacket, sendRecieveSocket); 
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+		DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, com.KNOWNLEN);
+		
+		messageReceived = recievePacket.getData();
+		com.guiPrintArr("Recieved message from Host:", messageReceived, area);
+		
+		byte[] fileContent = new byte[com.fileLength];
+		System.arraycopy(messageReceived, 2, fileContent, 0, com.fileLength);
 
 	}
 	
 	public static void main(String[] args) {
 		Client client = new Client();
+
 		client.sendMesage(new byte[] {0,1}, fileToSend, "Ascii");
 		
 		try {
@@ -147,5 +141,3 @@ public class Client {
 		}
 	}
 }
-
-
