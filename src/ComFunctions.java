@@ -179,7 +179,23 @@ public class ComFunctions {
 		String msgAsString = init + " " + new String(msg) + bytesToHex(msg) + "\n";
 		a.append(msgAsString);
 	}	
+	
 	public void guiPrint(String msg, JTextArea a) {
 		a.append(msg);
+	}
+	
+	public byte[] getBlock(int blockNumber, byte[] byteArray) {
+		byte[] temp = new byte[512];
+		int len = byteArray.length;
+		int track = 0;
+		for(int i = ((blockNumber - 1) * 512); i < ((blockNumber - 1) * 512 - 512); i ++) {
+			if(track < len) {
+				temp[track] = byteArray[i];
+			}else {
+				temp[track] = 0;
+			}
+			track ++;
+		}
+		return temp;
 	}
 }
