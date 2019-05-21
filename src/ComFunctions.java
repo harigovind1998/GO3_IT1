@@ -643,7 +643,6 @@ public class ComFunctions {
 		try {
 			Files.write(path, bytesArray, StandardOpenOption.APPEND);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -661,10 +660,10 @@ public class ComFunctions {
 		for(int i = ((blockNumber - 1) * 512); i < ((blockNumber ) * 512); i ++) {
 			if(track < len) {
 				temp[track] = byteArray[i];
-			}else {
+			} else {
 				temp[track] = 0;
 			}
-			track ++;
+			track++;
 		}
 		return temp;
 	}

@@ -77,7 +77,7 @@ public class ServerWorker extends Thread {
 			SendingResponse = com.createPacket(com.generateAckMessage(com.intToByte(blockNum)), clientPort);
 			com.sendPacket(SendingResponse, SendRecieveSocket);
 			RecievedResponse = com.recievePacket(SendRecieveSocket, BLOCK_SIZE);
-			com.writeArrayIntoFile(RecievedResponse.getData(), FileSystems.getDefault().getPath("./server/", "temp.log"));
+			com.writeArrayIntoFile(RecievedResponse.getData(), FileSystems.getDefault().getPath("./server/", fileName));
 			if (!com.CheckData(RecievedResponse, blockNum)) {
 				System.out.println("Wrong block received");
 			}
@@ -85,6 +85,7 @@ public class ServerWorker extends Thread {
 				System.out.println("End of file reached");
 				break;
 			}
+			++blockNum;
 		}
 	}
 	
