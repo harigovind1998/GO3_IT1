@@ -89,9 +89,9 @@ public class ServerWorker extends Thread {
 	 */
 	public void run() {
 		decodePacket();
-		if(job == 1) {
+		if (job == 1) {
 			writeServe();
-		}else if (job ==2) {
+		} else if (job ==2) {
 			readServe();
 		}
 	}
