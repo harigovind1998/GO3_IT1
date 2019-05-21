@@ -109,8 +109,8 @@ public class Client {
 		messageReceived = recievePacket.getData();
 		com.guiPrintArr("Recieved message from Host:", messageReceived, area);
 		
-		byte[] fileContent = new byte[com.fileLength];
-		System.arraycopy(messageReceived, 2, fileContent, 0, com.fileLength);
+		byte[] dataArr = com.ParseBlockData(messageReceived);
+		System.arraycopy(dataArr, 0, fileContent, 0, dataArr.length);
 
 	}
 	
