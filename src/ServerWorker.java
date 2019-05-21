@@ -1,6 +1,8 @@
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.Arrays;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 
 public class ServerWorker extends Thread {
 	private final int BLOCK_SIZE = 512;
@@ -70,11 +72,12 @@ public class ServerWorker extends Thread {
 	 * Sends ACK packet to client (after WRQ)
 	 */
 	private void writeServe() {
-		byte[] blockNum = new byte[2];
+		int blockNum = 1;
 		while (true) {
-			SendingResponse = com.createPacket(com.generateAckMessage(blockNum), clientPort);
+			SendingResponse = com.createPacket(com.generateAckMessage(com.intToByte(blockNum)), clientPort);
 			com.sendPacket(SendingResponse, SendRecieveSocket);
 			RecievedResponse = com.recievePacket(SendRecieveSocket, BLOCK_SIZE);
+			com.writeArrayIntoFile(RecievedResponse.getData(), FileSystems.getDefault().getPath("./server/", "temp.log"));
 			if (!com.CheckData(RecievedResponse, blockNum)) {
 				System.out.println("Wrong block received");
 			}

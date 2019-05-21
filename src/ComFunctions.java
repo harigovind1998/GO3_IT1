@@ -703,9 +703,9 @@ public class ComFunctions {
 	 * @param blockNum Block number that is to be expected
 	 * @return True if the actual packet matches with the expected, else false.
 	 */
-	public boolean CheckData(DatagramPacket packet, byte[] blockNum) {
-		//byte[] blockByte = intToByte(block);
-		if (packet.getData()[2] == blockNum[0] && packet.getData()[3] == blockNum[1] && packet.getData().length <= 513) {
+	public boolean CheckData(DatagramPacket packet, int blockNum) {
+		byte[] blockByte = intToByte(blockNum);
+		if (packet.getData()[2] == blockByte[0] && packet.getData()[3] == blockByte[1] && packet.getData().length <= 516) {
 			return true;
 		} else {
 			return false;
