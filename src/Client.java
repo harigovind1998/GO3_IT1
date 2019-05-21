@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.io.FileOutputStream; 
 import java.io.OutputStream; 
+import java.util.Scanner;
 
 public class Client {
 	ComFunctions com;
@@ -27,6 +28,8 @@ public class Client {
 	private byte[] fileContent = new byte[fileLength];
 	private static byte[] rrq = {0,1};
 	private static byte[] wrq = {0,2};
+	private static int mode;
+	private int byteCounter = 0;
 	
 	public Client() {
 		// TODO Auto-generated constructor stub
@@ -125,18 +128,41 @@ public class Client {
 	public void writeFile(String name, String format) {
 		byte[] fileAsByteArr = com.readFileIntoArray(name);
 		fileLength = fileAsByteArr.length;
+		byte[] request = com.generateMessage(wrq, name, format);
+		DatagramPacket requestPacket = com.createPacket(request, 23); //creating the datagram, specifying the destination port and message
+		com.sendPacket(requestPacket, sendRecieveSocket);
+		
+		if (mode == 1) {
+			com.verboseMode("Sent", wrq, name, format, area);
+		}
+		
 		int numOfBlocks = (int) Math.ceil(fileLength / 512);
 		for(int i = 0; i < numOfBlocks; i++) {
 			byte[] fileBlock = com.getBlock(i+1, fileAsByteArr);
-			byte[] msg = com.generateMessage(wrq, fileBlock, format);
+			byte[] msg = com.generateDataPacket(com.intToByte(i+1), fileBlock);
 			com.printMessage("Sending Message:", msg);
 			DatagramPacket sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
 			com.sendPacket(sendPacket, sendRecieveSocket);
 			
+			byteCounter = 0;
+			for(byte b: fileBlock) {
+				if(fileBlock[b] != (byte)0) {
+					byteCounter++;
+				}
+			}
+			
+			if(mode == 1) {
+				com.verboseMode("Sent", com.parsePacketType(msg), i+1, byteCounter, area);
+			}
+			
 			DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, com.KNOWNLEN);
-			if(com.CheckAck(recievePacket, i)) {
+			if(com.CheckAck(recievePacket, i+1)) {
 				messageReceived = recievePacket.getData();
 				com.guiPrintArr("Recieved message from Host:", messageReceived, area);
+				
+				if (mode == 1) {
+					com.verboseMode("Received", com.parsePacketType(messageReceived), i+1, messageReceived.length, area);
+				}
 			}else {
 				System.out.println("Wrong Packet Received");
 			}
@@ -150,6 +176,10 @@ public class Client {
 		DatagramPacket sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
 		com.sendPacket(sendPacket, sendRecieveSocket);
 		
+		if (mode == 1) {
+			com.verboseMode("Sent", rrq, name, format, area);
+		}
+		
 		outerloop:
 		while(true) {
 			DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, 512);
@@ -157,10 +187,26 @@ public class Client {
 				blockNum++;
 				messageReceived = recievePacket.getData();
 				byte[] dataReceived = com.parseBlockData(messageReceived);
+				
+				byteCounter = 0;
+				for(byte b: dataReceived) {
+					if(dataReceived[b] != (byte)0) {
+						byteCounter++;
+					}
+				}
+				
+				if (mode == 1) {
+					com.verboseMode("Received", com.parsePacketType(dataReceived), blockNum, byteCounter, area);
+				}
+				
 				System.arraycopy(dataReceived, 0, fileContent, 0, dataReceived.length);
 				byte[] ackMsg = com.generateAckMessage(com.intToByte(blockNum));
 				DatagramPacket ackPacket = com.createPacket(ackMsg, 23);
 				com.sendPacket(ackPacket, sendRecieveSocket);
+				
+				if (mode == 1) {
+					com.verboseMode("Sent", com.parsePacketType(ackMsg), blockNum, byteCounter, area);
+				}
 				
 				//check to see if the bloc size is < 512, and if it is, break	
 				if(dataReceived[511] == (byte)0) {
@@ -174,6 +220,10 @@ public class Client {
 	
 	public static void main(String[] args) {
 		Client client = new Client();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Select Mode : Quiet [0], Verbose [1]");
+		mode = sc.nextInt();
+		sc.close();
 		client.sendMesage(new byte[] {0,1}, fileToSend, "Ascii");
 		
 		try {
