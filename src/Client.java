@@ -22,11 +22,11 @@ public class Client {
 	private static JTextArea area = new JTextArea();
 	private static JScrollPane scroll = new JScrollPane(area);
 	private static byte[] messageReceived;
-	private static Path f1path = FileSystems.getDefault().getPath("SYSC3303", "test.txt");
+	//private static Path f1path = FileSystems.getDefault().getPath("SYSC3303", "test.txt");
 	//public static Path f2path = FileSystems.getDefault().getPath("SYSC3303", "returnTest.txt");
-	public static  Path  f2path = Paths.get("./Client/returnTest.txt");
+	public static  Path  f2path = Paths.get("./Client/returnTest2.txt");
 	private int fileLength;
-	private byte[] fileContent = new byte[fileLength];
+	//private byte[] fileContent = new byte[fileLength];
 	private static byte[] rrq = {0,1};
 	private static byte[] wrq = {0,2};
 	private static int mode;
@@ -120,50 +120,57 @@ public class Client {
 	*/
 	
 	public void writeFile(String name, String format) {
-		byte[] fileAsByteArr = com.readFileIntoArray(name);
+		byte[] fileAsByteArr = com.readFileIntoArray("./Client/"+name);
 		
-		try {
-			Files.write(f1path, fileAsByteArr);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			Files.write(f1path, fileAsByteArr);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		fileLength = fileAsByteArr.length;
 		byte[] request = com.generateMessage(wrq, name, format);
+		DatagramPacket sendPacket =  null;
 		DatagramPacket requestPacket = com.createPacket(request, 23); //creating the datagram, specifying the destination port and message
 		com.sendPacket(requestPacket, sendRecieveSocket);
-		
+		DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, com.UNKNOWNLEN);
+		if(!com.CheckAck(recievePacket, 0)) {
+			System.out.println("Not the correct ACK packet");
+			System.exit(0);
+		}
 		if (mode == 1) {
 			com.verboseMode("Sent", wrq, name, format, area);
 		}
 		
+		byte[] fileBlock = null;
+		byte [] msg =  null;
 		int numOfBlocks = (int) Math.ceil(fileLength / 512);
-		for(int i = 0; i < numOfBlocks; i++) {
-			byte[] fileBlock = com.getBlock(i+1, fileAsByteArr);
-			byte[] msg = com.generateDataPacket(com.intToByte(i+1), fileBlock);
+		numOfBlocks ++;
+		for(int i = 1; i < numOfBlocks; i++) {
+			fileBlock = com.getBlock(i, fileAsByteArr);
+			msg = com.generateDataPacket(com.intToByte(i), fileBlock);
 			com.printMessage("Sending Message:", msg);
-			DatagramPacket sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
-			com.sendPacket(sendPacket, sendRecieveSocket);
-			
+			sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
 			byteCounter = 0;
 			for(byte b: fileBlock) {
 				if(fileBlock[b] != (byte)0) {
 					byteCounter++;
 				}
 			}
+			com.sendPacket(sendPacket, sendRecieveSocket);	
 			
 			if(mode == 1) {
-				com.verboseMode("Sent", com.parsePacketType(msg), i+1, byteCounter, area);
+				com.verboseMode("Sent", com.parsePacketType(msg), i, byteCounter, area);
 			}
 			
-			DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, com.KNOWNLEN);
-			if(com.CheckAck(recievePacket, i+1)) {
+			recievePacket = com.recievePacket(sendRecieveSocket, com.KNOWNLEN);
+			if(com.CheckAck(recievePacket, i)) {
 				messageReceived = recievePacket.getData();
 				com.guiPrintArr("Recieved message from Host:", messageReceived, area);
 				
 				if (mode == 1) {
-					com.verboseMode("Received", com.parsePacketType(messageReceived), i+1, messageReceived.length, area);
+					com.verboseMode("Received", com.parsePacketType(messageReceived), i, messageReceived.length, area);
 				}
 			}else {
 				System.out.println("Wrong Packet Received");
@@ -231,12 +238,13 @@ public class Client {
 		System.out.println("Select Mode : Quiet [0], Verbose [1]");
 		mode = sc.nextInt();
 		sc.close();
-		
+		System.out.println(mode);
 		//client.sendMesage(new byte[] {0,1}, fileToSend, "Ascii");
 		//client.readFile("test1.txt", "Ascii");
 		
-		client.writeFile("test.txt", "Ascii");
-		
+		client.writeFile("test.txt", "Ascii");		//client.readFile("test2.txt", "Ascii");
+		client.writeFile("returnTest.txt", "Ascii");
+		//client.writeFile("test.txt", "Ascii");		
 //		try {
 //			byte[] fileReceived = Files.readAllBytes(f2path);
 //			byte[] fileSent = Files.readAllBytes(f1path);
