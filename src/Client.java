@@ -24,7 +24,7 @@ public class Client {
 	private static byte[] messageReceived;
 	private static Path f1path = FileSystems.getDefault().getPath("SYSC3303", "test.txt");
 	//public static Path f2path = FileSystems.getDefault().getPath("SYSC3303", "returnTest.txt");
-	public static  Path  f2path = Paths.get("./Client/returnTest.txt");
+	public static  Path  f2path = Paths.get("./Client/returnTest2.txt");
 	private int fileLength;
 	private byte[] fileContent = new byte[fileLength];
 	private static byte[] rrq = {0,1};
@@ -133,6 +133,7 @@ public class Client {
 		byte[] fileBlock = null;
 		byte [] msg =  null;
 		int numOfBlocks = (int) Math.ceil(fileLength / 512);
+		numOfBlocks ++;
 		for(int i = 1; i < numOfBlocks; i++) {
 			fileBlock = com.getBlock(i, fileAsByteArr);
 			msg = com.generateDataPacket(com.intToByte(i), fileBlock);
@@ -147,7 +148,7 @@ public class Client {
 			com.sendPacket(sendPacket, sendRecieveSocket);	
 			
 			if(mode == 1) {
-				com.verboseMode("Sent", com.parsePacketType(msg), i+1, byteCounter, area);
+				com.verboseMode("Sent", com.parsePacketType(msg), i, byteCounter, area);
 			}
 			
 			recievePacket = com.recievePacket(sendRecieveSocket, com.KNOWNLEN);
@@ -156,7 +157,7 @@ public class Client {
 				com.guiPrintArr("Recieved message from Host:", messageReceived, area);
 				
 				if (mode == 1) {
-					com.verboseMode("Received", com.parsePacketType(messageReceived), i+1, messageReceived.length, area);
+					com.verboseMode("Received", com.parsePacketType(messageReceived), i, messageReceived.length, area);
 				}
 			}else {
 				System.out.println("Wrong Packet Received");
@@ -227,7 +228,8 @@ public class Client {
 		sc.close();
 		System.out.println(mode);
 		//client.sendMesage(new byte[] {0,1}, fileToSend, "Ascii");
-		client.readFile("test1.txt", "Ascii");
+		//client.readFile("test2.txt", "Ascii");
+		client.writeFile("returnTest.txt", "Ascii");
 		//client.writeFile("test.txt", "Ascii");
 		
 //		try {

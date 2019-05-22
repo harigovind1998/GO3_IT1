@@ -1,6 +1,7 @@
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.nio.ByteBuffer;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class ServerWorker extends Thread {
@@ -74,7 +75,34 @@ public class ServerWorker extends Thread {
 	}
 	
 	private void writeServe(){
-		
+		int blockNum = 0;
+		byte[] incomingBlock = new byte[2];
+		SendingResponse = com.createPacket(com.generateAckMessage(com.intToByte(blockNum)), clientPort);
+		com.sendPacket(SendingResponse, SendRecieveSocket);
+		byte[] ackMsg = null;
+		DatagramPacket ackPacket = null;
+		blockNum++;
+		while (true) {
+			RecievedResponse = com.recievePacket(SendRecieveSocket, BLOCK_SIZE);
+			incomingBlock[0] = RecievedResponse.getData()[2];
+			incomingBlock[1] = RecievedResponse.getData()[3];
+			if(! (blockNum == ByteBuffer.wrap(incomingBlock).getShort())) {
+				System.out.println("Wrong data packet recieved");
+				System.exit(0);
+			}
+			com.writeArrayIntoFile(com.parseBlockData(RecievedResponse.getData()), Paths.get("./Server/" + fileName));
+			ackMsg = com.generateAckMessage(com.intToByte(blockNum));
+			ackPacket = com.createPacket(ackMsg, clientPort);
+			com.sendPacket(ackPacket, SendRecieveSocket);
+//			if (!com.CheckData(RecievedResponse, blockNum)) {
+//				System.out.println("Wrong block received");
+//			}
+			if(RecievedResponse.getData()[SendingResponse.getLength() -1] == 0){
+				System.out.println("End of file reached");
+				break;
+			}
+			++blockNum;
+}
 	}
 	
 	/**

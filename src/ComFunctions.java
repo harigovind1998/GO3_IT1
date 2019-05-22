@@ -327,7 +327,9 @@ import javax.swing.*;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class ComFunctions {
 	
@@ -632,6 +634,21 @@ public class ComFunctions {
 		a.append(msg);
 	}
 	
+	
+	
+	/**
+	 * Writes a byte array into a file.
+	 * @param bytesArray Bytes to be written into file
+	 * @param path File path
+	 */
+	public void writeArrayIntoFile(byte[] bytesArray, Path path) {
+		try {
+			Files.write(path, bytesArray, StandardOpenOption.APPEND);
+			//Files.write();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Get a block that is to be send through the socket
 	 * @param blockNumber block number that is needed
@@ -676,6 +693,22 @@ public class ComFunctions {
 		if(packet.getData()[2] == blockByte[0] && packet.getData()[3] == blockByte[1] && packet.getData()[0]==0 && packet.getData()[1]==4) {
 			return true;
 		}else {
+			return false;
+		}
+	}
+	
+	
+	/**
+	 * Checks to see if the DATA packet is the one that is to be expected.
+	 * @param packet Received packet
+	 * @param blockNum Block number that is to be expected
+	 * @return True if the actual packet matches with the expected, else false.
+	 */
+	public boolean CheckData(DatagramPacket packet, int blockNum) {
+		byte[] blockByte = intToByte(blockNum);
+		if (packet.getData()[2] == blockByte[0] && packet.getData()[3] == blockByte[1] && packet.getData().length <= 516) {
+			return true;
+		} else {
 			return false;
 		}
 	}
