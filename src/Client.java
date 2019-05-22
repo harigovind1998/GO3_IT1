@@ -233,8 +233,9 @@ public class Client {
 		sc.close();
 		
 		//client.sendMesage(new byte[] {0,1}, fileToSend, "Ascii");
-		client.readFile("test1.txt", "Ascii");
-		//client.writeFile("test.txt", "Ascii");
+		//client.readFile("test1.txt", "Ascii");
+		
+		client.writeFile("test.txt", "Ascii");
 		
 //		try {
 //			byte[] fileReceived = Files.readAllBytes(f2path);

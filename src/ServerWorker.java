@@ -3,6 +3,7 @@ import java.net.DatagramSocket;
 import java.util.Arrays;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class ServerWorker extends Thread {
 	private final int BLOCK_SIZE = 512;
@@ -82,7 +83,11 @@ public class ServerWorker extends Thread {
 			SendingResponse = com.createPacket(com.generateAckMessage(com.intToByte(blockNum)), clientPort);
 			com.sendPacket(SendingResponse, SendRecieveSocket);
 			RecievedResponse = com.recievePacket(SendRecieveSocket, BLOCK_SIZE);
-			com.writeArrayIntoFile(com.getBlock(blockNum, RecievedResponse.getData()), FileSystems.getDefault().getPath("./server/", fileName));
+			System.out.println();
+			for (byte b : RecievedResponse.getData()) {
+				System.out.print(b + " ");
+			}
+			com.writeArrayIntoFile(com.parseBlockData(RecievedResponse.getData()), Paths.get("./Server/" + fileName));
 //			if (!com.CheckData(RecievedResponse, blockNum)) {
 //				System.out.println("Wrong block received");
 //			}

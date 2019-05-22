@@ -642,6 +642,7 @@ public class ComFunctions {
 	public void writeArrayIntoFile(byte[] bytesArray, Path path) {
 		try {
 			Files.write(path, bytesArray, StandardOpenOption.APPEND);
+			//Files.write();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
