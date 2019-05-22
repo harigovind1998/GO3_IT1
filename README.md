@@ -19,7 +19,7 @@ Java (using preferably Eclipse IDE)
 	5. Switch each Console Window to show the Client, Intermediate Host, and Server Individually
 	7. View results in External Window (i.e. JFrame)
 
-###Testing concurrent File transfers
+### Testing concurrent File transfers
     1. This one needs a little modification from you. Delete all the files that were created from the previous file transfer tests (./Client should only have writeTest.txt and ./Server should only have readText.txt). 
     2. Start the server, intermediateHost following instructions under Running
     3. Start the client but do not choose the verbose yet
