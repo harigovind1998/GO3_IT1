@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_iJWqsHw9EemWCd_bFD6Ftg" name="Model">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_iJWqsXw9EemWCd_bFD6Ftg">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Model" xmi:id="_X1VAsHw-EemWCd_bFD6Ftg" name="java">
+    <packagedElement xmi:type="uml:Package" xmi:id="_X1VAsXw-EemWCd_bFD6Ftg" name="java">
+      <packagedElement xmi:type="uml:Package" xmi:id="_X1VAsnw-EemWCd_bFD6Ftg" name="net">
+        <packagedElement xmi:type="uml:Class" xmi:id="_X1VAs3w-EemWCd_bFD6Ftg" name="DatagramSocket"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_X1q-8Xw-EemWCd_bFD6Ftg" name="DatagramPacket"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_X1YEAXw-EemWCd_bFD6Ftg" name="nio">
+        <packagedElement xmi:type="uml:Package" xmi:id="_X1YEAnw-EemWCd_bFD6Ftg" name="file">
+          <packagedElement xmi:type="uml:Class" xmi:id="_X1YEA3w-EemWCd_bFD6Ftg" name="Path"/>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_X1agQHw-EemWCd_bFD6Ftg" name="lang">
+        <packagedElement xmi:type="uml:Class" xmi:id="_X1agQXw-EemWCd_bFD6Ftg" name="String"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_X2JgEXw-EemWCd_bFD6Ftg" name="Thread"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_X1agQ3w-EemWCd_bFD6Ftg" name="io">
+        <packagedElement xmi:type="uml:Class" xmi:id="_X1bHUHw-EemWCd_bFD6Ftg" name="File"/>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Model" xmi:id="_X1Xc8Hw-EemWCd_bFD6Ftg" name="datatype">
+    <packagedElement xmi:type="uml:Package" xmi:id="_X1Xc8Xw-EemWCd_bFD6Ftg" name="datatype">
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_X1Xc8nw-EemWCd_bFD6Ftg" name="Byte"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_X1YrEHw-EemWCd_bFD6Ftg" name="Integer"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_X1qX4Hw-EemWCd_bFD6Ftg" name="Char"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_X10v83w-EemWCd_bFD6Ftg" name="Boolean"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Model" xmi:id="_zDk6sHw-EemWCd_bFD6Ftg" name="src">
+    <packagedElement xmi:type="uml:Class" xmi:id="_zDnW8Hw-EemWCd_bFD6Ftg" name="Client" visibility="public">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDn-AHw-EemWCd_bFD6Ftg" name="com" type="_zDnW8Xw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDn-AXw-EemWCd_bFD6Ftg" name="sendRecieveSocket" type="_X1VAs3w-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDolEHw-EemWCd_bFD6Ftg" name="frame" visibility="private" isStatic="true" type="_zDn-BHw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDolEnw-EemWCd_bFD6Ftg" name="area" visibility="private" isStatic="true" type="_zDolEXw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDolFHw-EemWCd_bFD6Ftg" name="scroll" visibility="private" isStatic="true" type="_zDolE3w-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDpMIHw-EemWCd_bFD6Ftg" name="messageReceived" visibility="private" isStatic="true" type="_X1Xc8nw-EemWCd_bFD6Ftg" isUnique="false">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zDpMIXw-EemWCd_bFD6Ftg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zDpMInw-EemWCd_bFD6Ftg" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDpMI3w-EemWCd_bFD6Ftg" name="f2path" visibility="public" isStatic="true" type="_X1YEA3w-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDpMJHw-EemWCd_bFD6Ftg" name="fileLength" visibility="private" type="_X1YrEHw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDpMJXw-EemWCd_bFD6Ftg" name="rrq" visibility="private" isStatic="true" type="_X1Xc8nw-EemWCd_bFD6Ftg" isUnique="false">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zDpMJnw-EemWCd_bFD6Ftg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zDpMJ3w-EemWCd_bFD6Ftg" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDpzMHw-EemWCd_bFD6Ftg" name="wrq" visibility="private" isStatic="true" type="_X1Xc8nw-EemWCd_bFD6Ftg" isUnique="false">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zDpzMXw-EemWCd_bFD6Ftg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zDpzMnw-EemWCd_bFD6Ftg" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDpzM3w-EemWCd_bFD6Ftg" name="mode" visibility="private" isStatic="true" type="_X1YrEHw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDpzNHw-EemWCd_bFD6Ftg" name="byteCounter" visibility="private" type="_X1YrEHw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zDpzNXw-EemWCd_bFD6Ftg" name="byteToFile" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDpzNnw-EemWCd_bFD6Ftg" type="_X1bHUHw-EemWCd_bFD6Ftg" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDqaQHw-EemWCd_bFD6Ftg" name="bytes" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zDqaQXw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zDqaQnw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDqaQ3w-EemWCd_bFD6Ftg" name="path" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zDqaRHw-EemWCd_bFD6Ftg" name="writeFile" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zDqaRXw-EemWCd_bFD6Ftg">
+          <body>
+    public void sendMesage(byte[] type, File file, String format) {
+		//generating the message in byte format
+		byte[] fileAsByteArr;
+		try {
+			fileAsByteArr = Files.readAllBytes(file.toPath());
+			fileLength = fileAsByteArr.length;
+			int numOfBlocks = (int) Math.ceil(fileLength / 512);
+			for(int i = 0; i &lt; numOfBlocks; i++) {
+				byte[] fileBlock = com.getBlock(i, fileAsByteArr);
+				byte[] msg = com.generateMessage(type, fileBlock, format);
+				com.printMessage(&quot;Sending Message:&quot;, msg);
+				DatagramPacket sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
+				com.sendPacket(sendPacket, sendRecieveSocket);
+				
+				DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, com.KNOWNLEN);
+				if(com.CheckAck(recievePacket, i)) {
+					messageReceived = recievePacket.getData();
+					com.guiPrintArr(&quot;Recieved message from Host:&quot;, messageReceived, area);
+					
+					byte[] dataArr = com.parseBlockData(messageReceived);
+					System.arraycopy(dataArr, 0, fileContent, 0, dataArr.length);
+				}else {
+					System.out.println(&quot;Wrong Packet Received&quot;);
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+
+		DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, com.KNOWNLEN);
+		
+		messageReceived = recievePacket.getData();
+		com.guiPrintArr(&quot;Recieved message from Host:&quot;, messageReceived, area);
+		
+		byte[] dataArr = com.parseBlockData(messageReceived);
+		//System.arraycopy(dataArr, 0, fileContent, 0, dataArr.length);
+
+=======
+>>>>>>> 82f7960c48c82dc0771a1851184fcca0a5415e01
+	}
+	</body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDqaRnw-EemWCd_bFD6Ftg" name="name" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDrBUHw-EemWCd_bFD6Ftg" name="format" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zDrBUXw-EemWCd_bFD6Ftg" name="readFile" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDrBUnw-EemWCd_bFD6Ftg" name="name" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDrBU3w-EemWCd_bFD6Ftg" name="format" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zDrBVHw-EemWCd_bFD6Ftg" name="main" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDrBVXw-EemWCd_bFD6Ftg" name="args" type="_X1agQXw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zDrBVnw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zDrBV3w-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_zDnW8Xw-EemWCd_bFD6Ftg" name="ComFunctions" visibility="public">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDwg4Hw-EemWCd_bFD6Ftg" name="KNOWNLEN" visibility="public" isLeaf="true" type="_X1YrEHw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDwg4Xw-EemWCd_bFD6Ftg" name="UNKNOWNLEN" visibility="public" isLeaf="true" type="_X1YrEHw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zDwg4nw-EemWCd_bFD6Ftg" name="hexArr" visibility="private" isLeaf="true" isStatic="true" type="_X1qX4Hw-EemWCd_bFD6Ftg" isUnique="false">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zDwg43w-EemWCd_bFD6Ftg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zDwg5Hw-EemWCd_bFD6Ftg" value="*"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zDwg5Xw-EemWCd_bFD6Ftg" name="recievePacket" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zDwg5nw-EemWCd_bFD6Ftg">
+          <body>
+	 * Recieves a packet on the specified socket 
+	 * @param socket Socket to listen to
+	 * @param len length of the packet, either 4 or 100 bytes long
+	 * @return recieved DatagramPakcet
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDxH8Hw-EemWCd_bFD6Ftg" type="_X1q-8Xw-EemWCd_bFD6Ftg" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDxH8Xw-EemWCd_bFD6Ftg" name="socket" type="_X1VAs3w-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDxH8nw-EemWCd_bFD6Ftg" name="len" type="_X1YrEHw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zDxH83w-EemWCd_bFD6Ftg" name="sendPacket" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zDxH9Hw-EemWCd_bFD6Ftg">
+          <body>
+	 * Sends a packet through an initilized socket 
+	 * @param packet packet to send
+	 * @param socket socket to send the packet through
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDxH9Xw-EemWCd_bFD6Ftg" name="packet" type="_X1q-8Xw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDxvAHw-EemWCd_bFD6Ftg" name="socket" type="_X1VAs3w-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zDxvAXw-EemWCd_bFD6Ftg" name="startSocket" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zDxvAnw-EemWCd_bFD6Ftg">
+          <body>
+	 * Creates a DatagramSocket on available port
+	 * @return DatagramSocket
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDxvA3w-EemWCd_bFD6Ftg" type="_X1VAs3w-EemWCd_bFD6Ftg" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zDxvBHw-EemWCd_bFD6Ftg" name="startSocket" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zDxvBXw-EemWCd_bFD6Ftg">
+          <body>
+	 * Creates a DatagramSocket on specified port
+	 * @param port port the Socket needs to created on
+	 * @return DatagramSocket linked to the specified port
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDyWEHw-EemWCd_bFD6Ftg" type="_X1VAs3w-EemWCd_bFD6Ftg" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDyWEXw-EemWCd_bFD6Ftg" name="port" type="_X1YrEHw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zDyWEnw-EemWCd_bFD6Ftg" name="createPacket" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zDyWE3w-EemWCd_bFD6Ftg">
+          <body>
+	 * Creates an DatagramPocket to be passed through a DatagramSocket.
+	 * @param msg Byte array message
+	 * @param address address of the destination socket
+	 * @param port port number of the destination socket
+	 * @return DatagramPacket that can be used for sending
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDyWFHw-EemWCd_bFD6Ftg" type="_X1q-8Xw-EemWCd_bFD6Ftg" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDyWFXw-EemWCd_bFD6Ftg" name="msg" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zDyWFnw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zDy9IHw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDy9IXw-EemWCd_bFD6Ftg" name="port" type="_X1YrEHw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zDy9Inw-EemWCd_bFD6Ftg" name="createPacket" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zDy9I3w-EemWCd_bFD6Ftg">
+          <body>
+	 * Creates an DatagramPocket used to handle DatagramSocket receive.
+	 * @param len desired length of the packet
+	 * @return new empty DatatgramPacket of desired length
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDy9JHw-EemWCd_bFD6Ftg" type="_X1q-8Xw-EemWCd_bFD6Ftg" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDy9JXw-EemWCd_bFD6Ftg" name="len" type="_X1YrEHw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zDzkMHw-EemWCd_bFD6Ftg" name="generateMessage" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zDzkMXw-EemWCd_bFD6Ftg">
+          <body>
+	 * Generates a byte message to be passed through the sockets. Creates an empty byte array of length equal
+	 * to the length of the file name, plus the length of the format, plus 4 to account for the 2 bytes used 
+	 * for specify if the message operation and 2 more for the 0 in the middle and end of the message.
+	 * @param type Message operation that is being sent, either a read or a write
+	 * @param file name of the file
+	 * @param format format of the file
+	 * @return byte array of specified message format
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDzkMnw-EemWCd_bFD6Ftg" type="_X1Xc8nw-EemWCd_bFD6Ftg" direction="return">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zDzkM3w-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zDzkNHw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDzkNXw-EemWCd_bFD6Ftg" name="type" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zDzkNnw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zDzkN3w-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDzkOHw-EemWCd_bFD6Ftg" name="file" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD0LQHw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD0LQXw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD0LQnw-EemWCd_bFD6Ftg" name="format" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD0LQ3w-EemWCd_bFD6Ftg" name="generateMessage" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zD0LRHw-EemWCd_bFD6Ftg">
+          <body>
+	 * Generates a byte message to be passed through the sockets. Creates an empty byte array of length equal
+	 * to the length of the file name, plus the length of the format, plus 4 to account for the 2 bytes used 
+	 * for specify if the message operation and 2 more for the 0 in the middle and end of the message.
+	 * @param type Message operation that is being sent, either a read or a write
+	 * @param file name of the file
+	 * @param format format of the file
+	 * @return byte array of specified message format
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD0LRXw-EemWCd_bFD6Ftg" type="_X1Xc8nw-EemWCd_bFD6Ftg" direction="return">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD0LRnw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD0LR3w-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD0yUHw-EemWCd_bFD6Ftg" name="type" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD0yUXw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD0yUnw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD0yU3w-EemWCd_bFD6Ftg" name="file" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD0yVHw-EemWCd_bFD6Ftg" name="format" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD0yVXw-EemWCd_bFD6Ftg" name="generateDataPacket" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD0yVnw-EemWCd_bFD6Ftg" type="_X1Xc8nw-EemWCd_bFD6Ftg" direction="return">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD1ZYHw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD1ZYXw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD1ZYnw-EemWCd_bFD6Ftg" name="blockNumber" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD1ZY3w-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD1ZZHw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD1ZZXw-EemWCd_bFD6Ftg" name="block" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD1ZZnw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD1ZZ3w-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD1ZaHw-EemWCd_bFD6Ftg" name="generateAckMessage" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zD1ZaXw-EemWCd_bFD6Ftg">
+          <body>
+	 * Generates an Acknowledge Response 
+	 * @param blockNumber Block number that has just been received
+	 * @return 
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD2AcHw-EemWCd_bFD6Ftg" type="_X1Xc8nw-EemWCd_bFD6Ftg" direction="return">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD2AcXw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD2Acnw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD2Ac3w-EemWCd_bFD6Ftg" name="blockNumber" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD2AdHw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD2AdXw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD2Adnw-EemWCd_bFD6Ftg" name="generateErrMessage" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zD2Ad3w-EemWCd_bFD6Ftg">
+          <body>
+	 * Generates a error response to be sent through the DatatgramPacket
+	 * @param errCode specified error Code
+	 * @param errMsg Contains more information about the error
+	 * @return generated byte array message
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD2ngHw-EemWCd_bFD6Ftg" type="_X1Xc8nw-EemWCd_bFD6Ftg" direction="return">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD2ngXw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD2ngnw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD2ng3w-EemWCd_bFD6Ftg" name="errCode" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD2nhHw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD2nhXw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD2nhnw-EemWCd_bFD6Ftg" name="errMsg" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD2nh3w-EemWCd_bFD6Ftg" name="printMessage" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zD3OkHw-EemWCd_bFD6Ftg">
+          <body>
+	 * Prints out the contents of a packet
+	 * @param init initial message 
+	 * @param msg message to print 
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD3OkXw-EemWCd_bFD6Ftg" name="init" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD3Oknw-EemWCd_bFD6Ftg" name="msg" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD3Ok3w-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD3OlHw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD3OlXw-EemWCd_bFD6Ftg" name="checkMessage" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zD3Olnw-EemWCd_bFD6Ftg">
+          <body>
+	 * Checks to see if a byte array is on the required format read/write,text,0,text,0...0
+	 * @param msg message that is to be checked
+	 * @return true if the format is correct and false if it is not
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD3Ol3w-EemWCd_bFD6Ftg" type="_X10v83w-EemWCd_bFD6Ftg" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD31oHw-EemWCd_bFD6Ftg" name="msg" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD31oXw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD31onw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD31o3w-EemWCd_bFD6Ftg" name="readFileIntoArray" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zD31pHw-EemWCd_bFD6Ftg">
+          <body>
+	 * Reads a file into a byte array
+	 * @param path path to the file
+	 * @return byte array of the file contents
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD31pXw-EemWCd_bFD6Ftg" type="_X1Xc8nw-EemWCd_bFD6Ftg" direction="return">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD31pnw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD31p3w-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD31qHw-EemWCd_bFD6Ftg" name="path" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD4csHw-EemWCd_bFD6Ftg" name="bytesToHex" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD4csXw-EemWCd_bFD6Ftg" type="_X1agQXw-EemWCd_bFD6Ftg" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD4csnw-EemWCd_bFD6Ftg" name="bytes" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD4cs3w-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD4ctHw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD4ctnw-EemWCd_bFD6Ftg" name="guiPrintArr" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD5DwHw-EemWCd_bFD6Ftg" name="init" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD5DwXw-EemWCd_bFD6Ftg" name="msg" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD5Dwnw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD5Dw3w-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD5DxHw-EemWCd_bFD6Ftg" name="a" type="_zD4ctXw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD5DxXw-EemWCd_bFD6Ftg" name="guiPrint" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD5Dxnw-EemWCd_bFD6Ftg" name="msg" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD5q0Hw-EemWCd_bFD6Ftg" name="a" type="_zD4ctXw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD5q0Xw-EemWCd_bFD6Ftg" name="writeArrayIntoFile" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zD5q0nw-EemWCd_bFD6Ftg">
+          <body>
+	 * Writes a byte array into a file.
+	 * @param bytesArray Bytes to be written into file
+	 * @param path File path
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD5q03w-EemWCd_bFD6Ftg" name="bytesArray" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD5q1Hw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD5q1Xw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD5q1nw-EemWCd_bFD6Ftg" name="path" type="_X1YEA3w-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD5q13w-EemWCd_bFD6Ftg" name="getBlock" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zD5q2Hw-EemWCd_bFD6Ftg">
+          <body>
+	 * Get a block that is to be send through the socket
+	 * @param blockNumber block number that is needed
+	 * @param byteArray byteArray containing the file contents 
+	 * @return temp which holds the byteArr of a blockNumber
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD5q2Xw-EemWCd_bFD6Ftg" type="_X1Xc8nw-EemWCd_bFD6Ftg" direction="return">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD6R4Hw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD6R4Xw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD6R4nw-EemWCd_bFD6Ftg" name="blockNumber" type="_X1YrEHw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD6R43w-EemWCd_bFD6Ftg" name="byteArray" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD6R5Hw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD6R5Xw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD6R5nw-EemWCd_bFD6Ftg" name="intToByte" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zD6R53w-EemWCd_bFD6Ftg">
+          <body>
+	 * Converts a number into a 2 bytes, has a range of 0 to 65535
+	 * @param num number to be converted
+	 * @return byte array
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD6R6Hw-EemWCd_bFD6Ftg" type="_X1Xc8nw-EemWCd_bFD6Ftg" direction="return">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD6R6Xw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD6R6nw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD6R63w-EemWCd_bFD6Ftg" name="num" type="_X1YrEHw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD648Hw-EemWCd_bFD6Ftg" name="CheckAck" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zD648Xw-EemWCd_bFD6Ftg">
+          <body>
+	 * Checks to see if the acknowledge packet is the one that is to be expected
+	 * @param packet Packet that has just come in
+	 * @param block block number that is expected
+	 * @return 
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD648nw-EemWCd_bFD6Ftg" type="_X10v83w-EemWCd_bFD6Ftg" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD6483w-EemWCd_bFD6Ftg" name="packet" type="_X1q-8Xw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD649Hw-EemWCd_bFD6Ftg" name="block" type="_X1YrEHw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD649Xw-EemWCd_bFD6Ftg" name="CheckData" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zD649nw-EemWCd_bFD6Ftg">
+          <body>
+	 * Checks to see if the DATA packet is the one that is to be expected.
+	 * @param packet Received packet
+	 * @param blockNum Block number that is to be expected
+	 * @return True if the actual packet matches with the expected, else false.
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD6493w-EemWCd_bFD6Ftg" type="_X10v83w-EemWCd_bFD6Ftg" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD64-Hw-EemWCd_bFD6Ftg" name="packet" type="_X1q-8Xw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD64-Xw-EemWCd_bFD6Ftg" name="blockNum" type="_X1YrEHw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD7gAHw-EemWCd_bFD6Ftg" name="parseBlockData" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zD7gAXw-EemWCd_bFD6Ftg">
+          <body>
+	 * Takes the packet sent and parses out the data
+	 * @param arr the array of bytes being sent
+	 * @return data only the data of the array sent
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD7gAnw-EemWCd_bFD6Ftg" type="_X1Xc8nw-EemWCd_bFD6Ftg" direction="return">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD7gA3w-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD7gBHw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD7gBXw-EemWCd_bFD6Ftg" name="arr" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD7gBnw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD7gB3w-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD7gCHw-EemWCd_bFD6Ftg" name="verboseMode" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD8HEHw-EemWCd_bFD6Ftg" name="status" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD8HEXw-EemWCd_bFD6Ftg" name="packetType" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD8HEnw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD8HE3w-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD8HFHw-EemWCd_bFD6Ftg" name="filename" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD8HFXw-EemWCd_bFD6Ftg" name="mode" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD8HFnw-EemWCd_bFD6Ftg" name="a" type="_zD4ctXw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD8uIHw-EemWCd_bFD6Ftg" name="verboseMode" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD8uIXw-EemWCd_bFD6Ftg" name="status" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD8uInw-EemWCd_bFD6Ftg" name="packetType" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD8uI3w-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD8uJHw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD8uJXw-EemWCd_bFD6Ftg" name="blockNum" type="_X1YrEHw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD8uJnw-EemWCd_bFD6Ftg" name="numBytes" type="_X1YrEHw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD9VMHw-EemWCd_bFD6Ftg" name="a" type="_zD4ctXw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD9VMXw-EemWCd_bFD6Ftg" name="verboseMode" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD9VMnw-EemWCd_bFD6Ftg" name="status" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD9VM3w-EemWCd_bFD6Ftg" name="packetType" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD98QHw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD98QXw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD98Qnw-EemWCd_bFD6Ftg" name="blockNum" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD98Q3w-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD98RHw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD98RXw-EemWCd_bFD6Ftg" name="numBytes" type="_X1YrEHw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD98Rnw-EemWCd_bFD6Ftg" name="a" type="_zD4ctXw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD-jUHw-EemWCd_bFD6Ftg" name="verboseMode" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD-jUXw-EemWCd_bFD6Ftg" type="_X1agQXw-EemWCd_bFD6Ftg" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD-jUnw-EemWCd_bFD6Ftg" name="status" type="_X1agQXw-EemWCd_bFD6Ftg"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD-jU3w-EemWCd_bFD6Ftg" name="packet" type="_X1q-8Xw-EemWCd_bFD6Ftg"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD-jVHw-EemWCd_bFD6Ftg" name="getFileName" visibility="private">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zD-jVXw-EemWCd_bFD6Ftg">
+          <body>
+	 * Gets the name of the file that is being written into or read from
+	 </body>
+        </ownedComment>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD-jVnw-EemWCd_bFD6Ftg" type="_X1agQXw-EemWCd_bFD6Ftg" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD_KYHw-EemWCd_bFD6Ftg" name="data" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD_KYXw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD_KYnw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zD_KY3w-EemWCd_bFD6Ftg" name="parsePacketType" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD_KZHw-EemWCd_bFD6Ftg" type="_X1Xc8nw-EemWCd_bFD6Ftg" direction="return">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD_KZXw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD_KZnw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zD_KZ3w-EemWCd_bFD6Ftg" name="packetType" type="_X1Xc8nw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zD_KaHw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zD_KaXw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_zDn-Anw-EemWCd_bFD6Ftg" name="javax">
+      <packagedElement xmi:type="uml:Package" xmi:id="_zDn-A3w-EemWCd_bFD6Ftg" name="swing">
+        <packagedElement xmi:type="uml:Class" xmi:id="_zDn-BHw-EemWCd_bFD6Ftg" name="JFrame"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_zDolEXw-EemWCd_bFD6Ftg" name="JTextArea"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_zDolE3w-EemWCd_bFD6Ftg" name="JScrollPane"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_zD4ctXw-EemWCd_bFD6Ftg" name="JTextArea"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_zEAYgHw-EemWCd_bFD6Ftg" name="IntermediateHost" visibility="public">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEAYgXw-EemWCd_bFD6Ftg" name="clientRecieveSocket" type="_X1VAs3w-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEAYgnw-EemWCd_bFD6Ftg" name="clientSendSocket" type="_X1VAs3w-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEA_kHw-EemWCd_bFD6Ftg" name="sendRecieveSocket" type="_X1VAs3w-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEA_kXw-EemWCd_bFD6Ftg" name="clientRecievePacket" type="_X1q-8Xw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEA_knw-EemWCd_bFD6Ftg" name="clientSendPacket" type="_X1q-8Xw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEA_k3w-EemWCd_bFD6Ftg" name="serverSendPacket" type="_X1q-8Xw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEA_lHw-EemWCd_bFD6Ftg" name="serverRecievePacket" type="_X1q-8Xw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEA_lXw-EemWCd_bFD6Ftg" name="com" type="_zDnW8Xw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEA_lnw-EemWCd_bFD6Ftg" name="port" type="_X1YrEHw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zEA_l3w-EemWCd_bFD6Ftg" name="recieveMessage" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zEBmoHw-EemWCd_bFD6Ftg">
+          <body>
+	 * Waits to recieve a message from the client and passes that on to the server
+	 </body>
+        </ownedComment>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zEBmoXw-EemWCd_bFD6Ftg" name="main" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zEBmonw-EemWCd_bFD6Ftg" name="args" type="_X1agQXw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zEBmo3w-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zEBmpHw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_zEC0wHw-EemWCd_bFD6Ftg" name="Server" visibility="public">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEC0wXw-EemWCd_bFD6Ftg" name="REQUEST_SIZE" visibility="private" isLeaf="true" type="_X1YrEHw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEC0wnw-EemWCd_bFD6Ftg" name="recieveSocket" type="_X1VAs3w-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEDb0Hw-EemWCd_bFD6Ftg" name="errorSocket" type="_X1VAs3w-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEDb0Xw-EemWCd_bFD6Ftg" name="recievePacket" type="_X1q-8Xw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEDb0nw-EemWCd_bFD6Ftg" name="errorPacket" type="_X1q-8Xw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEDb03w-EemWCd_bFD6Ftg" name="com" type="_zDnW8Xw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEEC4Hw-EemWCd_bFD6Ftg" name="mode" type="_X1YrEHw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zEEC4Xw-EemWCd_bFD6Ftg" name="serve" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zEEC4nw-EemWCd_bFD6Ftg">
+          <body>
+	 * loops and keeps serving all the incoming requests
+	 </body>
+        </ownedComment>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zEEC43w-EemWCd_bFD6Ftg" name="main" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zEEC5Hw-EemWCd_bFD6Ftg" name="args" type="_X1agQXw-EemWCd_bFD6Ftg">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zEEC5Xw-EemWCd_bFD6Ftg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zEEC5nw-EemWCd_bFD6Ftg" value="*"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_zEFRAHw-EemWCd_bFD6Ftg" name="ServerExitListener" visibility="public">
+      <generalization xmi:type="uml:Generalization" xmi:id="_zEF4EHw-EemWCd_bFD6Ftg" general="_X2JgEXw-EemWCd_bFD6Ftg"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zEF4EXw-EemWCd_bFD6Ftg" name="run" visibility="public"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_zEHtQHw-EemWCd_bFD6Ftg" name="ServerWorker" visibility="public">
+      <generalization xmi:type="uml:Generalization" xmi:id="_zEHtQXw-EemWCd_bFD6Ftg" general="_X2JgEXw-EemWCd_bFD6Ftg"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEIUUHw-EemWCd_bFD6Ftg" name="BLOCK_SIZE" visibility="private" isLeaf="true" type="_X1YrEHw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEIUUXw-EemWCd_bFD6Ftg" name="initialPacket" visibility="private" type="_X1q-8Xw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEIUUnw-EemWCd_bFD6Ftg" name="RecievedResponse" visibility="private" type="_X1q-8Xw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEIUU3w-EemWCd_bFD6Ftg" name="SendingResponse" visibility="private" type="_X1q-8Xw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEIUVHw-EemWCd_bFD6Ftg" name="clientPort" visibility="private" type="_X1YrEHw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEI7YHw-EemWCd_bFD6Ftg" name="fileName" visibility="private" type="_X1agQXw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEI7YXw-EemWCd_bFD6Ftg" name="SendRecieveSocket" visibility="private" type="_X1VAs3w-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEI7Ynw-EemWCd_bFD6Ftg" name="com" visibility="private" type="_zDnW8Xw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEI7Y3w-EemWCd_bFD6Ftg" name="job" visibility="private" type="_X1YrEHw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEI7ZHw-EemWCd_bFD6Ftg" name="mode" visibility="private" type="_X1YrEHw-EemWCd_bFD6Ftg" isUnique="false"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEI7ZXw-EemWCd_bFD6Ftg" name="rrq" visibility="private" isStatic="true" type="_X1Xc8nw-EemWCd_bFD6Ftg" isUnique="false">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zEJicHw-EemWCd_bFD6Ftg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zEJicXw-EemWCd_bFD6Ftg" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zEJicnw-EemWCd_bFD6Ftg" name="wrq" visibility="private" isStatic="true" type="_X1Xc8nw-EemWCd_bFD6Ftg" isUnique="false">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zEJic3w-EemWCd_bFD6Ftg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zEJidHw-EemWCd_bFD6Ftg" value="*"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zEJidXw-EemWCd_bFD6Ftg" name="getFileName" visibility="private">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zEJidnw-EemWCd_bFD6Ftg">
+          <body>
+	 * Gets the name of the file that is being written into or read from
+	 </body>
+        </ownedComment>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zEKJgHw-EemWCd_bFD6Ftg" name="decodePacket" visibility="private">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zEKJgXw-EemWCd_bFD6Ftg">
+          <body>
+	 * Decodes the incoming packet to get the necessary information, namely the file name and whether the its a read or write request
+	 </body>
+        </ownedComment>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zEKJgnw-EemWCd_bFD6Ftg" name="readServe" visibility="private">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zEKJg3w-EemWCd_bFD6Ftg">
+          <body>
+	 * Sends the contents over to the client
+	 </body>
+        </ownedComment>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zEKJhHw-EemWCd_bFD6Ftg" name="writeServe" visibility="private">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zEKJhXw-EemWCd_bFD6Ftg">
+          <body>
+	 * Sends ACK packet to client (after WRQ)
+	 </body>
+        </ownedComment>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zEKJhnw-EemWCd_bFD6Ftg" name="run" visibility="public">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_zEKJh3w-EemWCd_bFD6Ftg">
+          <body>
+	 * decodes and then performs the necessary task
+	 </body>
+        </ownedComment>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_UCPUIHw_EemWCd_bFD6Ftg" memberEnd="_UCPUIXw_EemWCd_bFD6Ftg _UCOtEHw_EemWCd_bFD6Ftg">
+      <name xsi:nil="true"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_UCPUIXw_EemWCd_bFD6Ftg" name="client" type="_zDnW8Hw-EemWCd_bFD6Ftg" association="_UCPUIHw_EemWCd_bFD6Ftg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UCPUInw_EemWCd_bFD6Ftg" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UCPUI3w_EemWCd_bFD6Ftg" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_UCOtEHw_EemWCd_bFD6Ftg" name="comFunctions" type="_zDnW8Xw-EemWCd_bFD6Ftg" association="_UCPUIHw_EemWCd_bFD6Ftg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UCOtEXw_EemWCd_bFD6Ftg" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UCOtEnw_EemWCd_bFD6Ftg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_UezUU3w_EemWCd_bFD6Ftg" memberEnd="_UezUVHw_EemWCd_bFD6Ftg _UezUUHw_EemWCd_bFD6Ftg">
+      <name xsi:nil="true"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_UezUVHw_EemWCd_bFD6Ftg" name="intermediateHost" type="_zEAYgHw-EemWCd_bFD6Ftg" association="_UezUU3w_EemWCd_bFD6Ftg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UezUVXw_EemWCd_bFD6Ftg" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UezUVnw_EemWCd_bFD6Ftg" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_UezUUHw_EemWCd_bFD6Ftg" name="comFunctions" type="_zDnW8Xw-EemWCd_bFD6Ftg" association="_UezUU3w_EemWCd_bFD6Ftg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UezUUXw_EemWCd_bFD6Ftg" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UezUUnw_EemWCd_bFD6Ftg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_VJ1OUHw_EemWCd_bFD6Ftg" memberEnd="_VJ1OUXw_EemWCd_bFD6Ftg _VJ0nQHw_EemWCd_bFD6Ftg">
+      <name xsi:nil="true"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_VJ1OUXw_EemWCd_bFD6Ftg" name="serverWorker" type="_zEHtQHw-EemWCd_bFD6Ftg" association="_VJ1OUHw_EemWCd_bFD6Ftg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VJ1OUnw_EemWCd_bFD6Ftg" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VJ1OU3w_EemWCd_bFD6Ftg" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_VJ0nQHw_EemWCd_bFD6Ftg" name="comFunctions" type="_zDnW8Xw-EemWCd_bFD6Ftg" association="_VJ1OUHw_EemWCd_bFD6Ftg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VJ0nQXw_EemWCd_bFD6Ftg" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VJ0nQnw_EemWCd_bFD6Ftg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_WLs7A3w_EemWCd_bFD6Ftg" memberEnd="_WLs7BHw_EemWCd_bFD6Ftg _WLs7AHw_EemWCd_bFD6Ftg">
+      <name xsi:nil="true"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_WLs7BHw_EemWCd_bFD6Ftg" name="server" type="_zEC0wHw-EemWCd_bFD6Ftg" association="_WLs7A3w_EemWCd_bFD6Ftg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WLs7BXw_EemWCd_bFD6Ftg" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WLs7Bnw_EemWCd_bFD6Ftg" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_WLs7AHw_EemWCd_bFD6Ftg" name="comFunctions" type="_zDnW8Xw-EemWCd_bFD6Ftg" association="_WLs7A3w_EemWCd_bFD6Ftg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WLs7AXw_EemWCd_bFD6Ftg" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WLs7Anw_EemWCd_bFD6Ftg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
