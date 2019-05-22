@@ -330,6 +330,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
 
 public class ComFunctions {
 	
@@ -783,6 +784,62 @@ public class ComFunctions {
 		a.append("Block Number: " + ByteBuffer.wrap(blockNum).getShort() + "\n");
 		a.append("Block Size: " + Integer.toString(numBytes) + "\n");
 	}
+	
+	
+	public String verboseMode(String status, DatagramPacket packet) {
+		byte[] packetData = packet.getData();
+		String verbose = "";
+		String type = null;
+		verbose = verbose + "Packet " + status + "\n";
+		if(packetData[0] ==  (byte)0 && packetData[1] == (byte)1) {
+			verbose += "RRQ; " + getFileName(packetData) + "\n";
+		} else if (packetData[0] ==  (byte)0 && packetData[1] == (byte)2) {
+			verbose += "WRQ; " + getFileName(packetData) + "\n";
+		} else if (packetData[0] ==  (byte)0 && packetData[1] == (byte)3) {
+			byte[] blockNum = new byte[2];
+			blockNum[0] = packetData[2];
+			blockNum[1] = packetData[3];
+			int byteCounter = 0;
+			byte[] fileBlock = parseBlockData(packetData);
+			for(byte b: fileBlock) {
+				if(fileBlock[b] != (byte)0) {
+					byteCounter++;
+				}
+			}
+			verbose += "DATA; BlockNumber: " + ByteBuffer.wrap(blockNum).getShort() + "; Numer of Bytes: " + byteCounter + "\n";     
+		} else if (packetData[0] ==  (byte)0 && packetData[1] == (byte)4) {
+			byte[] blockNum = new byte[2];
+			blockNum[0] = packetData[2];
+			blockNum[1] = packetData[3];
+			verbose += "ACK; BlockNumber: " + ByteBuffer.wrap(blockNum).getShort() + "\n";
+		} else if (packetData[0] ==  (byte)0 && packetData[1] == (byte)5) {
+			type = "ERROR\n";
+		}
+		return verbose;
+	}
+	
+	
+	/**
+	 * Gets the name of the file that is being written into or read from
+	 */
+	private String getFileName(byte[] data) {
+		int[] secondZero = {3,0,0};
+		int track = 1;
+		for(int i = 3; i<data.length ; i ++) {
+			if(data[i] == 0) {
+				secondZero[track] = i;
+				track++;
+				if (track == 3) {
+					break;
+				}
+			}
+		}
+		byte[] file = Arrays.copyOfRange(data, 2 , secondZero[1]);
+		byte[] mode = Arrays.copyOfRange(data, secondZero[1]+1, secondZero[2]);
+		String fileName = new String(file);
+		return fileName;
+	}	
+	
 	
 	public byte[] parsePacketType(byte[] packetType) {
 		byte[] type = new byte[2];

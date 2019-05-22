@@ -22,11 +22,11 @@ public class Client {
 	private static JTextArea area = new JTextArea();
 	private static JScrollPane scroll = new JScrollPane(area);
 	private static byte[] messageReceived;
-	private static Path f1path = FileSystems.getDefault().getPath("SYSC3303", "test.txt");
+	//private static Path f1path = FileSystems.getDefault().getPath("SYSC3303", "test.txt");
 	//public static Path f2path = FileSystems.getDefault().getPath("SYSC3303", "returnTest.txt");
 	public static  Path  f2path = Paths.get("./Client/returnTest2.txt");
 	private int fileLength;
-	private byte[] fileContent = new byte[fileLength];
+	//private byte[] fileContent = new byte[fileLength];
 	private static byte[] rrq = {0,1};
 	private static byte[] wrq = {0,2};
 	private static int mode;
@@ -174,7 +174,6 @@ public class Client {
 		DatagramPacket recievePacket =  null;
 		byte[] dataReceived = null;
 		if (mode == 1) {
-			System.out.println("sup");
 			com.verboseMode("Sent", rrq, name, format, area);
 		}
 		

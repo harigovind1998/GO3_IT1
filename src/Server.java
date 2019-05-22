@@ -1,5 +1,6 @@
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.Scanner;
 
 
 public class Server {
@@ -7,7 +8,7 @@ public class Server {
 	DatagramSocket recieveSocket, errorSocket;
 	DatagramPacket recievePacket, errorPacket;
 	ComFunctions com;
-	
+	int mode;
 	/**
 	 * loops and keeps serving all the incoming requests
 	 */
@@ -15,8 +16,8 @@ public class Server {
 		while(true) {
 			recievePacket = com.recievePacket(recieveSocket, REQUEST_SIZE); 
 			if (com.checkMessage(recievePacket.getData())) {
-				System.out.println("Starting ServerWorker");
-				ServerWorker worker = new ServerWorker(Integer.toString((recievePacket.getPort())), recievePacket);
+				
+				ServerWorker worker = new ServerWorker(Integer.toString((recievePacket.getPort())), recievePacket,mode);
 				worker.start();
 			}else {
 				System.out.println("Error Packet");
@@ -30,6 +31,9 @@ public class Server {
 	
 	public Server() {
 		// TODO Auto-generated constructor stub
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Select Mode : Quiet [0], Verbose [1]");
+		mode = sc.nextInt();
 		com = new ComFunctions();
 		recieveSocket = com.startSocket(69);
 		//recievePacket = com.createPacket(BLOCK_SIZE);

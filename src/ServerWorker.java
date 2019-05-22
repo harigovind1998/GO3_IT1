@@ -8,10 +8,12 @@ public class ServerWorker extends Thread {
 	private final int BLOCK_SIZE = 512;
 	private DatagramPacket initialPacket, RecievedResponse, SendingResponse;
 	private int clientPort;
-	private String fileName, mode; 
+	private String fileName;
 	private DatagramSocket SendRecieveSocket; 
 	private ComFunctions com;
-	private int job;
+	private int job, mode;
+	private static byte[] rrq = {0,1};
+	private static byte[] wrq = {0,2};
 	//private byte[] fileByteReadArray, fileByteWriteArray;
 
 	
@@ -34,7 +36,7 @@ public class ServerWorker extends Thread {
 		byte[] file = Arrays.copyOfRange(data, 2 , secondZero[1]);
 		byte[] mode = Arrays.copyOfRange(data, secondZero[1]+1, secondZero[2]);
 		this.fileName = new String(file);
-		this.mode = new String(mode);
+		//this.mode = new String(mode);
 	}
 	
 	/**
@@ -43,7 +45,7 @@ public class ServerWorker extends Thread {
 	private void decodePacket() {
 		job = initialPacket.getData()[1]; //format of the message has been checked so second bit will determine if the request is a read or write
 		clientPort = initialPacket.getPort();
-		System.out.print(clientPort);
+		
 		getFileName();
 	}
 	
@@ -52,17 +54,22 @@ public class ServerWorker extends Thread {
 	 * Sends the contents over to the client
 	 */
 	private void readServe() {
-		System.out.println("Sending Data");
+		
 		byte [] fileByteReadArray = com.readFileIntoArray("./Server/" + fileName);
-		com.printMessage("File contains: ", fileByteReadArray);
 		int blockNum = 1;
 		while(true){
-			System.out.println("Sending block " + ByteBuffer.wrap(com.intToByte(blockNum)).getShort());
+			
 			byte[] msg = com.generateDataPacket(com.intToByte(blockNum), com.getBlock(blockNum, fileByteReadArray));
-			com.printMessage("Block contains: ", msg);
+			
 			SendingResponse = com.createPacket(msg, clientPort);
+			if(mode == 1) {
+				System.out.println(com.verboseMode("Sent", SendingResponse));
+			}
 			com.sendPacket(SendingResponse, SendRecieveSocket);
 			RecievedResponse = com.recievePacket(SendRecieveSocket, 100);
+			if(mode == 1) {
+				System.out.println(com.verboseMode("Recieve", RecievedResponse));
+			}
 			if(!com.CheckAck(RecievedResponse, blockNum)) {
 				System.out.println("Wrong block recieved");
 			}
@@ -78,12 +85,18 @@ public class ServerWorker extends Thread {
 		int blockNum = 0;
 		byte[] incomingBlock = new byte[2];
 		SendingResponse = com.createPacket(com.generateAckMessage(com.intToByte(blockNum)), clientPort);
+		if(mode == 1) {
+			System.out.println(com.verboseMode("Sent", SendingResponse));
+		}
 		com.sendPacket(SendingResponse, SendRecieveSocket);
 		byte[] ackMsg = null;
 		DatagramPacket ackPacket = null;
 		blockNum++;
 		while (true) {
 			RecievedResponse = com.recievePacket(SendRecieveSocket, BLOCK_SIZE);
+			if(mode == 1) {
+				System.out.println(com.verboseMode("Recieve", RecievedResponse));
+			}
 			incomingBlock[0] = RecievedResponse.getData()[2];
 			incomingBlock[1] = RecievedResponse.getData()[3];
 			if(! (blockNum == ByteBuffer.wrap(incomingBlock).getShort())) {
@@ -93,6 +106,9 @@ public class ServerWorker extends Thread {
 			com.writeArrayIntoFile(com.parseBlockData(RecievedResponse.getData()), Paths.get("./Server/" + fileName));
 			ackMsg = com.generateAckMessage(com.intToByte(blockNum));
 			ackPacket = com.createPacket(ackMsg, clientPort);
+			if(mode == 1) {
+				System.out.println(com.verboseMode("Send", ackPacket));
+			}
 			com.sendPacket(ackPacket, SendRecieveSocket);
 //			if (!com.CheckData(RecievedResponse, blockNum)) {
 //				System.out.println("Wrong block received");
@@ -102,14 +118,14 @@ public class ServerWorker extends Thread {
 				break;
 			}
 			++blockNum;
-}
+		}
 	}
 	
 	/**
 	 * decodes and then performs the necessary task
 	 */
 	public void run() {
-		System.out.println("Starting Decoding");
+		
 		decodePacket();
 		if(job == 1) {
 			readServe();
@@ -118,13 +134,13 @@ public class ServerWorker extends Thread {
 		}
 	}
 	
-	public ServerWorker(String name, DatagramPacket packet ) {
+	public ServerWorker(String name, DatagramPacket packet, int mode) {
 		// TODO Auto-generated constructor stub
 		super(name);
 		com = new ComFunctions();
 		SendRecieveSocket = com.startSocket();
 		initialPacket = packet;
-		
+		this.mode = mode;
 	}
 	
 }
