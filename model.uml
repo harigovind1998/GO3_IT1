@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_DF954Hw3EemWCd_bFD6Ftg" name="Send Datagram">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_DF954Xw3EemWCd_bFD6Ftg">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_GQqUQHw3EemWCd_bFD6Ftg" name="Server"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_OiJCQHw3EemWCd_bFD6Ftg" name="Client"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_4zW6QHw5EemWCd_bFD6Ftg" name="Form DATA"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_68wPsHw5EemWCd_bFD6Ftg" name="Form Datagram"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_H5qyEHw6EemWCd_bFD6Ftg" name="Receive Datagram"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_ORJ4kHw6EemWCd_bFD6Ftg" name="Extract Message"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_QEfecHw6EemWCd_bFD6Ftg" name="Verify DATA"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_TEN-8Hw6EemWCd_bFD6Ftg" name="Verify ACK"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_Vh0p0Hw6EemWCd_bFD6Ftg" name="Write File"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_Z0lfgHw6EemWCd_bFD6Ftg" name="Form ACK"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_dCPuUHw6EemWCd_bFD6Ftg" name="Send Datagram"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_mcW4UHw6EemWCd_bFD6Ftg" name="Datagram Socket"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_pNmQ4Hw6EemWCd_bFD6Ftg" name="Ephemeral Port">
+    <generalization xmi:type="uml:Generalization" xmi:id="_yAMu8Hw6EemWCd_bFD6Ftg" general="_mcW4UHw6EemWCd_bFD6Ftg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_rncdIHw6EemWCd_bFD6Ftg" name="Port 69">
+    <generalization xmi:type="uml:Generalization" xmi:id="_yjELcHw6EemWCd_bFD6Ftg" general="_mcW4UHw6EemWCd_bFD6Ftg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_2LCXsHw6EemWCd_bFD6Ftg" name="A_client_form data" memberEnd="_2LCXsXw6EemWCd_bFD6Ftg _2LCXtHw6EemWCd_bFD6Ftg">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_2LCXsXw6EemWCd_bFD6Ftg" name="client" type="_OiJCQHw3EemWCd_bFD6Ftg" association="_2LCXsHw6EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2LCXsnw6EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2LCXs3w6EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_2LCXtHw6EemWCd_bFD6Ftg" name="form data" type="_4zW6QHw5EemWCd_bFD6Ftg" association="_2LCXsHw6EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2LCXtXw6EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2LCXtnw6EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_25YEYHw6EemWCd_bFD6Ftg" name="A_client_form datagram" memberEnd="_25YEYXw6EemWCd_bFD6Ftg _25YEZHw6EemWCd_bFD6Ftg">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_25YEYXw6EemWCd_bFD6Ftg" name="client" type="_OiJCQHw3EemWCd_bFD6Ftg" association="_25YEYHw6EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_25YEYnw6EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_25YEY3w6EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_25YEZHw6EemWCd_bFD6Ftg" name="form datagram" type="_68wPsHw5EemWCd_bFD6Ftg" association="_25YEYHw6EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_25YEZXw6EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_25YEZnw6EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_5jUiIHw6EemWCd_bFD6Ftg" name="A_client_verify ack" memberEnd="_5jUiIXw6EemWCd_bFD6Ftg _5jUiJHw6EemWCd_bFD6Ftg">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_5jUiIXw6EemWCd_bFD6Ftg" name="client" type="_OiJCQHw3EemWCd_bFD6Ftg" association="_5jUiIHw6EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5jUiInw6EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5jUiI3w6EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_5jUiJHw6EemWCd_bFD6Ftg" name="verify ack" type="_TEN-8Hw6EemWCd_bFD6Ftg" association="_5jUiIHw6EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5jUiJXw6EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5jUiJnw6EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_6n3vYHw6EemWCd_bFD6Ftg" name="A_client_extract message" memberEnd="_6n3vYXw6EemWCd_bFD6Ftg _6n3vZHw6EemWCd_bFD6Ftg">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_6n3vYXw6EemWCd_bFD6Ftg" name="client" type="_OiJCQHw3EemWCd_bFD6Ftg" association="_6n3vYHw6EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6n3vYnw6EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6n3vY3w6EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_6n3vZHw6EemWCd_bFD6Ftg" name="extract message" type="_ORJ4kHw6EemWCd_bFD6Ftg" association="_6n3vYHw6EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6n3vZXw6EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6n3vZnw6EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_NQ78QHw7EemWCd_bFD6Ftg" name="A_server_extract message" memberEnd="_NQ78QXw7EemWCd_bFD6Ftg _NQ78RHw7EemWCd_bFD6Ftg">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_NQ78QXw7EemWCd_bFD6Ftg" name="server" type="_GQqUQHw3EemWCd_bFD6Ftg" association="_NQ78QHw7EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NQ78Qnw7EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NQ78Q3w7EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_NQ78RHw7EemWCd_bFD6Ftg" name="extract message" type="_ORJ4kHw6EemWCd_bFD6Ftg" association="_NQ78QHw7EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NQ78RXw7EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NQ78Rnw7EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_PZSI0Hw7EemWCd_bFD6Ftg" name="A_server_verify data" memberEnd="_PZSI0Xw7EemWCd_bFD6Ftg _PZSI1Hw7EemWCd_bFD6Ftg">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_PZSI0Xw7EemWCd_bFD6Ftg" name="server" type="_GQqUQHw3EemWCd_bFD6Ftg" association="_PZSI0Hw7EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_PZSI0nw7EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PZSI03w7EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_PZSI1Hw7EemWCd_bFD6Ftg" name="verify data" type="_QEfecHw6EemWCd_bFD6Ftg" association="_PZSI0Hw7EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_PZSI1Xw7EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PZSI1nw7EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_ToSf4Hw7EemWCd_bFD6Ftg" name="A_server_write file" memberEnd="_ToSf4Xw7EemWCd_bFD6Ftg _ToSf5Hw7EemWCd_bFD6Ftg">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_ToSf4Xw7EemWCd_bFD6Ftg" name="server" type="_GQqUQHw3EemWCd_bFD6Ftg" association="_ToSf4Hw7EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ToSf4nw7EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ToSf43w7EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_ToSf5Hw7EemWCd_bFD6Ftg" name="write file" type="_Vh0p0Hw6EemWCd_bFD6Ftg" association="_ToSf4Hw7EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ToSf5Xw7EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ToSf5nw7EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_gaiDUHw7EemWCd_bFD6Ftg" name="A_server_form datagram" memberEnd="_gaiDUXw7EemWCd_bFD6Ftg _gaiDVHw7EemWCd_bFD6Ftg">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_gaiDUXw7EemWCd_bFD6Ftg" name="server" type="_GQqUQHw3EemWCd_bFD6Ftg" association="_gaiDUHw7EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gaiDUnw7EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gaiDU3w7EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_gaiDVHw7EemWCd_bFD6Ftg" name="form datagram" type="_68wPsHw5EemWCd_bFD6Ftg" association="_gaiDUHw7EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gaiDVXw7EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gaiDVnw7EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_tamAUHw7EemWCd_bFD6Ftg" name="A_server_form ack" memberEnd="_tamAUXw7EemWCd_bFD6Ftg _tamAVHw7EemWCd_bFD6Ftg">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_tamAUXw7EemWCd_bFD6Ftg" name="server" type="_GQqUQHw3EemWCd_bFD6Ftg" association="_tamAUHw7EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_tamAUnw7EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_tamAU3w7EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_tamAVHw7EemWCd_bFD6Ftg" name="form ack" type="_Z0lfgHw6EemWCd_bFD6Ftg" association="_tamAUHw7EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_tamAVXw7EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_tamAVnw7EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_wbKOUHw7EemWCd_bFD6Ftg" name="A_datagram socket_send datagram" memberEnd="_wbKOUXw7EemWCd_bFD6Ftg _wbKOVHw7EemWCd_bFD6Ftg">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_wbKOUXw7EemWCd_bFD6Ftg" name="datagram socket" type="_mcW4UHw6EemWCd_bFD6Ftg" association="_wbKOUHw7EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wbKOUnw7EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wbKOU3w7EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_wbKOVHw7EemWCd_bFD6Ftg" name="send datagram" type="_dCPuUHw6EemWCd_bFD6Ftg" association="_wbKOUHw7EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wbKOVXw7EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wbKOVnw7EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_3GmLkHw7EemWCd_bFD6Ftg" name="A_datagram socket_receive datagram" memberEnd="_3GmLkXw7EemWCd_bFD6Ftg _3GmLlHw7EemWCd_bFD6Ftg">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_3GmLkXw7EemWCd_bFD6Ftg" name="datagram socket" type="_mcW4UHw6EemWCd_bFD6Ftg" association="_3GmLkHw7EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3GmLknw7EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3GmLk3w7EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_3GmLlHw7EemWCd_bFD6Ftg" name="receive datagram" type="_H5qyEHw6EemWCd_bFD6Ftg" association="_3GmLkHw7EemWCd_bFD6Ftg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3GmLlXw7EemWCd_bFD6Ftg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3GmLlnw7EemWCd_bFD6Ftg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>
