@@ -34,6 +34,7 @@ public class Server {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Select Mode : Quiet [0], Verbose [1]");
 		mode = sc.nextInt();
+		sc.close();
 		com = new ComFunctions();
 		recieveSocket = com.startSocket(69);
 		//recievePacket = com.createPacket(BLOCK_SIZE);

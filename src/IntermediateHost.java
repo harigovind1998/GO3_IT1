@@ -8,6 +8,7 @@ public class IntermediateHost {
 	ComFunctions com;
 	int port = 69;
 	int mode;
+	private int interHostPort = 23;
 	/**
 	 * Waits to recieve a message from the client and passes that on to the server
 	 */
@@ -54,9 +55,10 @@ public class IntermediateHost {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Select Mode : Quiet [0], Verbose [1]");
 		mode = sc.nextInt();
+		sc.close();
 		com = new ComFunctions();
 		clientSendSocket = com.startSocket();
-		clientRecieveSocket = com.startSocket(23);
+		clientRecieveSocket = com.startSocket(interHostPort);
 		sendRecieveSocket = com.startSocket();
 	}
 	

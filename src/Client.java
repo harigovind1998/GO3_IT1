@@ -31,6 +31,7 @@ public class Client {
 	private static byte[] wrq = {0,2};
 	private static int mode;
 	private int byteCounter = 0;
+	private int interHostPort = 23;
 	
 	public Client() {
 		// TODO Auto-generated constructor stub
@@ -120,7 +121,7 @@ public class Client {
 		fileLength = fileAsByteArr.length;
 		byte[] request = com.generateMessage(wrq, name, format);
 		DatagramPacket sendPacket =  null;
-		DatagramPacket requestPacket = com.createPacket(request, 23); //creating the datagram, specifying the destination port and message
+		DatagramPacket requestPacket = com.createPacket(request, interHostPort); //creating the datagram, specifying the destination port and message
 		com.sendPacket(requestPacket, sendRecieveSocket);
 		DatagramPacket recievePacket = com.recievePacket(sendRecieveSocket, com.UNKNOWNLEN);
 		if(!com.CheckAck(recievePacket, 0)) {
@@ -139,7 +140,7 @@ public class Client {
 			fileBlock = com.getBlock(i, fileAsByteArr);
 			msg = com.generateDataPacket(com.intToByte(i), fileBlock);
 	
-			sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
+			sendPacket = com.createPacket(msg, interHostPort); //creating the datagram, specifying the destination port and message
 			byteCounter = 0;
 			for(byte b: fileBlock) {
 				if(fileBlock[b] != (byte)0) {
@@ -180,7 +181,7 @@ public class Client {
 		}
 		
 		f2path = Paths.get("./Client/" + name);
-		DatagramPacket sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
+		DatagramPacket sendPacket = com.createPacket(msg, interHostPort); //creating the datagram, specifying the destination port and message
 		com.sendPacket(sendPacket, sendRecieveSocket);
 		DatagramPacket recievePacket =  null;
 		byte[] dataReceived = null;
@@ -214,7 +215,7 @@ public class Client {
 			}
 				//System.arraycopy(dataReceived, 0, fileContent, 0, dataReceived.length);
 			byte[] ackMsg = com.generateAckMessage(blockNum);
-			DatagramPacket ackPacket = com.createPacket(ackMsg, 23);
+			DatagramPacket ackPacket = com.createPacket(ackMsg, interHostPort);
 			com.sendPacket(ackPacket, sendRecieveSocket);
 			
 			if (mode == 1) {
@@ -237,31 +238,11 @@ public class Client {
 		mode = sc.nextInt();
 		sc.close();
 		System.out.println(mode);
-		//client.sendMesage(new byte[] {0,1}, fileToSend, "Ascii");
-		client.readFile("test2.txt", "Ascii");
-		//client.writeFile("returnTest.txt", "Ascii");
-		//client.writeFile("test.txt", "Ascii");
+
+		client.readFile("readTest.txt", "Ascii");
 		
-//		try {
-//			byte[] fileReceived = Files.readAllBytes(f2path);
-//			byte[] fileSent = Files.readAllBytes(f1path);
-//			
-//			int isSame = 0;
-//			for(byte b : fileSent) {
-//				if(fileReceived[b] != fileSent[b]) {
-//					isSame++; 
-//				}
-//			}
-//			
-//			if(isSame != 0 ) {
-//				area.append("Files do not match");
-//			} else {
-//				area.append("Files Match!");
-//			}
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		//client.writeFile("writeTest.txt", "Ascii");
+		
 
 	}
 }
