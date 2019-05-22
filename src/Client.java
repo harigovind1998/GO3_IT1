@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.nio.file.FileSystems;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,11 +20,11 @@ public class Client {
 	DatagramSocket sendRecieveSocket;
 	private static JFrame frame = new JFrame();
 	private static JTextArea area = new JTextArea();
-	private static JScrollPane scroll = new JScrollPane(area);
+	private static JScrollPane scroll;
 	private static byte[] messageReceived;
 	//private static Path f1path = FileSystems.getDefault().getPath("SYSC3303", "test.txt");
 	//public static Path f2path = FileSystems.getDefault().getPath("SYSC3303", "returnTest.txt");
-	public static  Path  f2path = Paths.get("./Client/returnTest2.txt");
+	public static  Path f2path = Paths.get("./Client/returnTest2.txt");
 	private int fileLength;
 	//private byte[] fileContent = new byte[fileLength];
 	private static byte[] rrq = {0,1};
@@ -38,8 +38,9 @@ public class Client {
 		sendRecieveSocket = com.startSocket();
 		frame.setSize(420, 440);
 		area.setBounds(10, 10, 380, 380);
+		scroll = new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setSize(400, 400);
-		scroll.add(area);
+		
 		frame.getContentPane().add(scroll);
 		frame.setLayout(null);
 		frame.setVisible(true);
@@ -137,7 +138,7 @@ public class Client {
 		for(int i = 1; i < numOfBlocks; i++) {
 			fileBlock = com.getBlock(i, fileAsByteArr);
 			msg = com.generateDataPacket(com.intToByte(i), fileBlock);
-			com.printMessage("Sending Message:", msg);
+	
 			sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
 			byteCounter = 0;
 			for(byte b: fileBlock) {
@@ -168,7 +169,17 @@ public class Client {
 	public void readFile(String name, String format) {
 		byte[] msg = com.generateMessage(rrq, name, format);
 		byte[] blockNum =  new byte[2];
-		com.printMessage("Sending Message:", msg);
+		
+		File yourFile = new File("./Client/" + name);
+		try {
+			yourFile.createNewFile();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.exit(0);
+		}
+		
+		f2path = Paths.get("./Client/" + name);
 		DatagramPacket sendPacket = com.createPacket(msg, 23); //creating the datagram, specifying the destination port and message
 		com.sendPacket(sendPacket, sendRecieveSocket);
 		DatagramPacket recievePacket =  null;
@@ -227,8 +238,8 @@ public class Client {
 		sc.close();
 		System.out.println(mode);
 		//client.sendMesage(new byte[] {0,1}, fileToSend, "Ascii");
-		//client.readFile("test2.txt", "Ascii");
-		client.writeFile("returnTest.txt", "Ascii");
+		client.readFile("test2.txt", "Ascii");
+		//client.writeFile("returnTest.txt", "Ascii");
 		//client.writeFile("test.txt", "Ascii");
 		
 //		try {

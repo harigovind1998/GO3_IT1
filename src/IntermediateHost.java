@@ -1,11 +1,13 @@
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.Scanner;
 
 public class IntermediateHost {
 	DatagramSocket clientRecieveSocket, clientSendSocket, sendRecieveSocket;
 	DatagramPacket clientRecievePacket, clientSendPacket, serverSendPacket, serverRecievePacket;
 	ComFunctions com;
 	int port = 69;
+	int mode;
 	/**
 	 * Waits to recieve a message from the client and passes that on to the server
 	 */
@@ -15,11 +17,15 @@ public class IntermediateHost {
 			//Recieving a message to from the client, prints the message, created a new packet to send to the server, prints that message for clarification and sends it the server
 			clientRecievePacket = com.recievePacket(clientRecieveSocket, 516);
 			
-			com.printMessage("Recieved message from client:", clientRecievePacket.getData());
+			if(mode == 1) {
+				System.out.println(com.verboseMode("Recieve", clientRecievePacket));
+			}
 			
 			serverSendPacket = com.createPacket(clientRecievePacket.getData(), port);
 			
-			com.printMessage("Sending message to Server:", serverSendPacket.getData());
+			if(mode == 1) {
+				System.out.println(com.verboseMode("Send", clientRecievePacket));
+			}
 			
 			com.sendPacket(serverSendPacket, sendRecieveSocket);
 			
@@ -28,12 +34,16 @@ public class IntermediateHost {
 			
 			port = serverRecievePacket.getPort();
 			
-			com.printMessage("Recieved message from Server:", serverRecievePacket.getData());
+
+			if(mode == 1) {
+				System.out.println(com.verboseMode("Recieve", serverRecievePacket));
+			}
 			
 			clientSendPacket = com.createPacket(serverRecievePacket.getData(), clientRecievePacket.getPort());
 			
-			com.printMessage("Sending message to client:", clientSendPacket.getData());
-			
+			if(mode == 1) {
+				System.out.println(com.verboseMode("Send", clientSendPacket));
+			}
 			com.sendPacket(clientSendPacket, clientSendSocket);
 		}
 	}
@@ -41,6 +51,9 @@ public class IntermediateHost {
 	
 	public IntermediateHost() {
 		// TODO Auto-generated constructor stub
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Select Mode : Quiet [0], Verbose [1]");
+		mode = sc.nextInt();
 		com = new ComFunctions();
 		clientSendSocket = com.startSocket();
 		clientRecieveSocket = com.startSocket(23);

@@ -1,3 +1,4 @@
+import java.io.File;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.nio.ByteBuffer;
@@ -12,8 +13,7 @@ public class ServerWorker extends Thread {
 	private DatagramSocket SendRecieveSocket; 
 	private ComFunctions com;
 	private int job, mode;
-	private static byte[] rrq = {0,1};
-	private static byte[] wrq = {0,2};
+
 	//private byte[] fileByteReadArray, fileByteWriteArray;
 
 	
@@ -34,7 +34,7 @@ public class ServerWorker extends Thread {
 			}
 		}
 		byte[] file = Arrays.copyOfRange(data, 2 , secondZero[1]);
-		byte[] mode = Arrays.copyOfRange(data, secondZero[1]+1, secondZero[2]);
+		//byte[] mode = Arrays.copyOfRange(data, secondZero[1]+1, secondZero[2]);
 		this.fileName = new String(file);
 		//this.mode = new String(mode);
 	}
@@ -82,6 +82,14 @@ public class ServerWorker extends Thread {
 	}
 	
 	private void writeServe(){
+		File yourFile = new File("./Server" + fileName);
+		try {
+			yourFile.createNewFile();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.exit(0);
+		}
 		int blockNum = 0;
 		byte[] incomingBlock = new byte[2];
 		SendingResponse = com.createPacket(com.generateAckMessage(com.intToByte(blockNum)), clientPort);

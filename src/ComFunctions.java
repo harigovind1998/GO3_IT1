@@ -789,7 +789,7 @@ public class ComFunctions {
 	public String verboseMode(String status, DatagramPacket packet) {
 		byte[] packetData = packet.getData();
 		String verbose = "";
-		String type = null;
+		
 		verbose = verbose + "Packet " + status + "\n";
 		if(packetData[0] ==  (byte)0 && packetData[1] == (byte)1) {
 			verbose += "RRQ; " + getFileName(packetData) + "\n";
@@ -813,7 +813,7 @@ public class ComFunctions {
 			blockNum[1] = packetData[3];
 			verbose += "ACK; BlockNumber: " + ByteBuffer.wrap(blockNum).getShort() + "\n";
 		} else if (packetData[0] ==  (byte)0 && packetData[1] == (byte)5) {
-			type = "ERROR\n";
+			verbose = "ERROR\n";
 		}
 		return verbose;
 	}
@@ -835,7 +835,7 @@ public class ComFunctions {
 			}
 		}
 		byte[] file = Arrays.copyOfRange(data, 2 , secondZero[1]);
-		byte[] mode = Arrays.copyOfRange(data, secondZero[1]+1, secondZero[2]);
+		//byte[] mode = Arrays.copyOfRange(data, secondZero[1]+1, secondZero[2]);
 		String fileName = new String(file);
 		return fileName;
 	}	
