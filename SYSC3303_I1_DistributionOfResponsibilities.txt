@@ -1,0 +1,16 @@
+Breakdown Of Responsibilities 
+
+Iteration 0:
+Used Hari's Assignment 1 as a base for Iteration 0.
+
+Steven -> Established WRQ and RRQ to be sent to the host from client and able to send DATA blocks when WRQ is sent
+Hari -> Receive RRQ from host and send DATA block to host to be sent to client
+Tarun -> Receive WRQ from host and send ACK block to host to be sent to client
+Yohannes -> Create verbose mode and have client able to send ACKs when RRQ is sent 
+
+Iteration 1: 
+
+Steven -> Clean up client to be thread safe, developed GUI that supports multi-threading
+Hari -> Allowed server to handle multiple clients and hosts safely along with cleaning up server, created systematic exit
+Tarun -> Clean up server and assisted with multi-threading on server side
+Yohannes -> Clean up client 
