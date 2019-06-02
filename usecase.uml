@@ -131,4 +131,28 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3GmLlnw7EemWCd_bFD6Ftg" value="1"/>
     </ownedEnd>
   </packagedElement>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_jpbhcIGPEemeioje1Cgnog" name="Error Simulator"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_ANXcAIGQEemeioje1Cgnog" name="Select Operation"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_7AVhAIGQEemeioje1Cgnog" name="A_error simulator_select operation" memberEnd="_7AVhAYGQEemeioje1Cgnog _7AVhBIGQEemeioje1Cgnog">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_7AVhAYGQEemeioje1Cgnog" name="error simulator" type="_jpbhcIGPEemeioje1Cgnog" association="_7AVhAIGQEemeioje1Cgnog">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7AVhAoGQEemeioje1Cgnog" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7AVhA4GQEemeioje1Cgnog" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_7AVhBIGQEemeioje1Cgnog" name="select operation" type="_ANXcAIGQEemeioje1Cgnog" association="_7AVhAIGQEemeioje1Cgnog">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7AVhBYGQEemeioje1Cgnog" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7AVhBoGQEemeioje1Cgnog" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_9lx5QIGQEemeioje1Cgnog" name="Normal">
+    <generalization xmi:type="uml:Generalization" xmi:id="_JZxrwIGREemeioje1Cgnog" general="_ANXcAIGQEemeioje1Cgnog"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="__bjIEIGQEemeioje1Cgnog" name="Lose Packet">
+    <generalization xmi:type="uml:Generalization" xmi:id="_J8iakIGREemeioje1Cgnog" general="_ANXcAIGQEemeioje1Cgnog"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_A1VlgIGREemeioje1Cgnog" name="Delay Packet">
+    <generalization xmi:type="uml:Generalization" xmi:id="_KdzUkIGREemeioje1Cgnog" general="_ANXcAIGQEemeioje1Cgnog"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_CNGCoIGREemeioje1Cgnog" name="Duplicate Packet">
+    <generalization xmi:type="uml:Generalization" xmi:id="_LAJMoIGREemeioje1Cgnog" general="_ANXcAIGQEemeioje1Cgnog"/>
+  </packagedElement>
 </uml:Model>
